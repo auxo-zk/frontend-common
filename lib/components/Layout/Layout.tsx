@@ -1,3 +1,4 @@
+import 'react-quill/dist/quill.snow.css';
 import { ReactNode } from 'react';
 import { Box } from '@mui/material';
 import Sidebar from './Sidebar/Sidebar';

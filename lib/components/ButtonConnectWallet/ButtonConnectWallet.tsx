@@ -19,12 +19,8 @@ function NotconnectedButton() {
     const { openModal } = useModalFunction();
     return (
         <>
-            <Button
-                variant="contained"
-                onClick={() => openModal({ title: 'Choose Wallet', content: <ModalListWalletConnect />, modalProps: { maxWidth: 'xs' } })}
-                sx={{ textAlign: 'center', height: { xs: '36px', xsm: '44px' } }}
-            >
-                <Box component={'span'} sx={{ display: { sm: 'block', xs: 'none' }, mr: 1, width: '130px' }}>
+            <Button variant="contained" onClick={() => openModal({ title: 'Choose Wallet', content: <ModalListWalletConnect />, modalProps: { maxWidth: 'xs' } })}>
+                <Box component={'span'} sx={{ display: { sm: 'block', xs: 'none' } }}>
                     Connect Wallet
                 </Box>
                 <IconWallet fontSize="large" sx={{ display: { xs: 'block', sm: 'none' } }} />
@@ -36,7 +32,8 @@ function ConnectingButton() {
     return (
         <Box>
             <Button
-                variant="gradient"
+                variant="contained"
+                disabled
                 startIcon={
                     <HourglassEmpty
                         sx={{
@@ -45,11 +42,8 @@ function ConnectingButton() {
                         }}
                     />
                 }
-                sx={{ height: { xs: '36px', xsm: '44px' } }}
             >
-                <Box component={'span'} sx={{ display: { sm: 'block', xs: 'none' } }}>
-                    Connecting...
-                </Box>
+                Connecting...
             </Button>
         </Box>
     );

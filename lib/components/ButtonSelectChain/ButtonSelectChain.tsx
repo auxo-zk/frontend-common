@@ -45,7 +45,7 @@ export function ButtonSelectChain() {
                         </Box>
                     </Button>
                 ) : (
-                    <Button onClick={handleClick} variant="outlined" endIcon={<ExpandMoreIcon sx={{ color: 'white', fontSize: '24px' }} />}>
+                    <Button onClick={handleClick} variant="outlined" endIcon={<ExpandMoreIcon sx={{ fontSize: '24px' }} />}>
                         <IconChainConnected sx={{ fontSize: '24px', mr: { xs: 0, sm: 1 } }} />
                         <Box component={'span'} sx={{ display: { sm: 'block', xs: 'none' } }}>
                             {infoChain[chainIdConnected]?.name}
