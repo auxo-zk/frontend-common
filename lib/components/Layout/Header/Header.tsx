@@ -2,6 +2,7 @@ import { Menu } from '@mui/icons-material';
 import { Box, Container } from '@mui/material';
 import { ButtonConnectWallet } from '../../ButtonConnectWallet';
 import { useEffect, useState } from 'react';
+import { ButtonSelectChain } from '../../ButtonSelectChain';
 
 export default function Header({ headerHeight }: { headerHeight: string }) {
     const [isScrollDown, setIsScrollDown] = useState<boolean>(false);
@@ -37,6 +38,8 @@ export default function Header({ headerHeight }: { headerHeight: string }) {
                 <Box component={'label'} htmlFor="control-sidebar" sx={{ display: { xs: 'flex', md: 'none' }, cursor: 'pointer', ml: 1 }}>
                     <Menu sx={{ fontSize: '28px' }} />
                 </Box>
+                <Box ml={'auto'}></Box>
+                <ButtonSelectChain />
                 <ButtonConnectWallet />
             </Container>
         </Box>

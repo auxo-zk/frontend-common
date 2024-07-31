@@ -2060,6 +2060,11 @@ base64-js@^1.3.1:
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
 
+bignumber.js@^9.1.2:
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.1.2.tgz#b7c4242259c008903b13707983b5f4bbd31eda0c"
+  integrity sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug==
+
 binary-extensions@^2.0.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.3.0.tgz#f6e14a97858d327252200242d4ccfe522c445522"
@@ -2362,10 +2367,10 @@ crossws@^0.2.0, crossws@^0.2.4:
   resolved "https://registry.yarnpkg.com/crossws/-/crossws-0.2.4.tgz#82a8b518bff1018ab1d21ced9e35ffbe1681ad03"
   integrity sha512-DAxroI2uSOgUKLz00NX6A8U/8EE3SZHmIND+10jkVSaypvyt57J5JEOxAQOL6lQxyzi/wZbTIwssU1uy69h5Vg==
 
-crypto-token-icon@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/crypto-token-icon/-/crypto-token-icon-0.0.9.tgz#2e4ff5acb0fe38af88d6a262872198d2e7518d17"
-  integrity sha512-Ir07DPhfCu/6D8+NXSud8LLDyk51/GlwWp/H0StaUJBmbzuaCXasbh7tV1zDYNhcRWh6eXLWZh2ycx+zGfC9ew==
+crypto-token-icon@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/crypto-token-icon/-/crypto-token-icon-0.0.10.tgz#01055c9605931e816510d842540447ffaabcbc16"
+  integrity sha512-S03CXFOhmKkXVFBUfZ/IK7YdViA1tvznoKpMLDB0qYss1gdp6A0KGZmr9fpwkQNouTxW80QldRXNg8V2EmF6bw==
 
 csstype@^3.0.2, csstype@^3.1.3:
   version "3.1.3"
@@ -2378,6 +2383,11 @@ date-fns@^2.29.3:
   integrity sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==
   dependencies:
     "@babel/runtime" "^7.21.0"
+
+date-fns@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-3.6.0.tgz#f20ca4fe94f8b754951b24240676e8618c0206bf"
+  integrity sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==
 
 de-indent@^1.0.2:
   version "1.0.2"
