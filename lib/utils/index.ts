@@ -1,8 +1,10 @@
-import { AssetInfo } from '../types';
+import { toast } from 'react-toastify';
 
-export function isNativeToken(assetInfo: AssetInfo) {
-    if ('native_token' in assetInfo) {
-        return true;
-    }
-    return false;
+export function isNumeric(num: any) {
+    return !isNaN(num) && !isNaN(parseFloat(num));
+}
+
+export function copyTextToClipboard(text: string) {
+    navigator.clipboard.writeText(text);
+    toast.success('Copied!');
 }

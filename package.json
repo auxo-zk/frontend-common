@@ -11,7 +11,7 @@
   },
   "author": "QuyenLee",
   "license": "ISC",
-  "main": "dist/auxo-frontend-common.js",
+  "main": "dist/frontend-common.js",
   "types": "dist/main.d.ts",
   "keywords": [
     "web3",
