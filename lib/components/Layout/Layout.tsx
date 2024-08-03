@@ -9,14 +9,14 @@ import { WalletProvider } from '../WalletProvider';
 import { ModalCustom } from '../ModalCustom';
 import { ToastNotifier } from '../ToastNotifier';
 
-export function Layout({ children, menu, logoApp }: { menu: MenuSidebar; children: ReactNode; logoApp: string }) {
+export function Layout({ children, menu, requiedLogin, walletConnectId }: { menu: MenuSidebar; children: ReactNode; requiedLogin: boolean; walletConnectId: string }) {
     const sidebarWidth = '202px';
     const headerHeight = '64px';
     return (
-        <WalletProvider>
+        <WalletProvider walletConnectId={walletConnectId}>
             <AppStateProvider>
                 <Box sx={{ position: 'relative' }}>
-                    <Sidebar sidebarWidth={sidebarWidth} headerHeight={headerHeight} menu={menu} logoApp={logoApp} />
+                    <Sidebar sidebarWidth={sidebarWidth} headerHeight={headerHeight} menu={menu} />
                     <Box
                         sx={{
                             position: 'relative',
@@ -28,7 +28,7 @@ export function Layout({ children, menu, logoApp }: { menu: MenuSidebar; childre
                             backgroundSize: '975px auto',
                         }}
                     >
-                        <Header headerHeight={headerHeight}></Header>
+                        <Header headerHeight={headerHeight} requiedLogin={requiedLogin}></Header>
                         <Box
                             sx={{
                                 minHeight: `calc(100svh - ${headerHeight})`,

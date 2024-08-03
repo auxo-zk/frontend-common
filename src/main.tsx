@@ -8,7 +8,8 @@ import { BrowserRouter } from 'react-router-dom';
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
         <Layout
-            logoApp=""
+            walletConnectId="6482349197b073ab1d34e32ec4907c1d"
+            requiedLogin={true}
             menu={[
                 {
                     icon: IconMenuExplorer,

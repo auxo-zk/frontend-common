@@ -332,16 +332,17 @@ export function getThemedComponent(theme: Theme): ThemeOptions {
                     root: {
                         textTransform: 'capitalize',
                         borderRadius: '12px',
-                        height: '44px',
                         boxShadow: 'none',
                     },
                     sizeMedium: {
                         ...theme.typography.button,
                         lineHeight: 1,
+                        height: '44px',
                         padding: '10px 16px',
                     },
                     sizeLarge: {
-                        padding: '12px 24px',
+                        height: '50px',
+                        padding: '12px 20px',
                     },
                     sizeSmall: {
                         padding: '4px 8px',
@@ -355,6 +356,10 @@ export function getThemedComponent(theme: Theme): ThemeOptions {
                         '&:hover, &.Mui-focusVisible': {
                             backgroundColor: darken(theme.palette.primary.main, 0.1),
                             boxShadow: ' 0px 2px 5px 0px ' + theme.palette.primary.main,
+                        },
+                        '&.Mui-disabled': {
+                            color: 'rgba(0, 0, 0, 0.26)',
+                            backgroundColor: 'rgba(0, 0, 0, 0.12)',
                         },
                     },
                     containedSecondary: {
@@ -394,6 +399,8 @@ export function getThemedComponent(theme: Theme): ThemeOptions {
             MuiTypography: {
                 defaultProps: {
                     variant: 'body1',
+                    fontFamily: FontInter,
+                    fontStyle: 'normal',
                     variantMapping: {
                         h1: 'h1',
                         h2: 'h2',
@@ -411,7 +418,13 @@ export function getThemedComponent(theme: Theme): ThemeOptions {
                         caption2: 'p',
                     },
                 },
+                styleOverrides: {
+                    root: {
+                        fontOpticalSizing: 'auto',
+                    },
+                },
             },
+
             MuiSvgIcon: {
                 styleOverrides: {
                     root: {
@@ -582,6 +595,12 @@ export function getThemedComponent(theme: Theme): ThemeOptions {
             },
             MuiMenuItem: {
                 styleOverrides: {
+                    root: {
+                        '&:hover': {
+                            backgroundColor: lighten(theme.palette.primary.main, 0.85),
+                            fontWeight: 600,
+                        },
+                    },
                     selected: {
                         color: theme.palette.primary.light,
                         background: '#CFE9E4',

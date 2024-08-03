@@ -4,9 +4,9 @@ import { walletConfig } from '../../states/wallet/config';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
-export function WalletProvider({ children }: BaseProviderProps) {
+export function WalletProvider({ children, walletConnectId }: BaseProviderProps & { walletConnectId: string }) {
     return (
-        <WagmiProvider config={walletConfig}>
+        <WagmiProvider config={walletConfig(walletConnectId)}>
             <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
         </WagmiProvider>
     );

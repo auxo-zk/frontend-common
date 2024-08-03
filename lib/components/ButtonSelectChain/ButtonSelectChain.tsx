@@ -14,7 +14,7 @@ export function ButtonSelectChain() {
     const IconChainConnected = infoChain[chainIdConnected]?.logoChain;
 
     const onSwitchChain = (item: number) => {
-        switchChain({ chainId: item as 42161 | 97 });
+        switchChain({ chainId: item as AppChainId });
         handleClickAway();
     };
 
@@ -45,7 +45,7 @@ export function ButtonSelectChain() {
                         </Box>
                     </Button>
                 ) : (
-                    <Button onClick={handleClick} variant="outlined" endIcon={<ExpandMoreIcon sx={{ fontSize: '24px' }} />}>
+                    <Button size="large" onClick={handleClick} variant="outlined" endIcon={<ExpandMoreIcon sx={{ fontSize: '24px' }} />}>
                         <IconChainConnected sx={{ fontSize: '24px', mr: { xs: 0, sm: 1 } }} />
                         <Box component={'span'} sx={{ display: { sm: 'block', xs: 'none' } }}>
                             {infoChain[chainIdConnected]?.name}
@@ -57,7 +57,7 @@ export function ButtonSelectChain() {
                     <Box
                         sx={{
                             position: 'absolute',
-                            top: '50px',
+                            top: 'calc(100% + 5px)',
                             left: '50%',
                             transform: 'translateX(-50%)',
                             width: '100%',

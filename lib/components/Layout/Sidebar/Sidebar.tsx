@@ -3,7 +3,7 @@ import { MenuSidebar } from '../../../types';
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-export default function Sidebar({ menu, sidebarWidth, headerHeight, logoApp }: { menu: MenuSidebar; sidebarWidth: string; headerHeight: string; logoApp: string }) {
+export default function Sidebar({ menu, sidebarWidth, headerHeight }: { menu: MenuSidebar; sidebarWidth: string; headerHeight: string }) {
     const route = useLocation();
     return (
         <Box
@@ -49,7 +49,7 @@ export default function Sidebar({ menu, sidebarWidth, headerHeight, logoApp }: {
                     sx={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', bgcolor: 'background.secondary', maxWidth: sidebarWidth, zIndex: 1, overflowY: 'auto' }}
                 >
                     <Box sx={{ height: headerHeight, display: 'flex', pl: 3, placeItems: 'center' }}>
-                        <img src={logoApp} alt="logo auxo" style={{ width: '90px', height: 'auto' }} />
+                        <img src={'/images/logo-sidebar'} alt="logo auxo" style={{ width: '90px', height: 'auto' }} />
                     </Box>
                     <Box mt={1} px={1}>
                         {menu.map((item, index) => {

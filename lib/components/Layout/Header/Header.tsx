@@ -4,7 +4,7 @@ import { ButtonConnectWallet } from '../../ButtonConnectWallet';
 import { useEffect, useState } from 'react';
 import { ButtonSelectChain } from '../../ButtonSelectChain';
 
-export default function Header({ headerHeight }: { headerHeight: string }) {
+export default function Header({ headerHeight, requiedLogin }: { headerHeight: string; requiedLogin: boolean }) {
     const [isScrollDown, setIsScrollDown] = useState<boolean>(false);
 
     useEffect(() => {
@@ -40,7 +40,7 @@ export default function Header({ headerHeight }: { headerHeight: string }) {
                 </Box>
                 <Box ml={'auto'}></Box>
                 <ButtonSelectChain />
-                <ButtonConnectWallet />
+                <ButtonConnectWallet requiedLogin={requiedLogin} />
             </Container>
         </Box>
     );
