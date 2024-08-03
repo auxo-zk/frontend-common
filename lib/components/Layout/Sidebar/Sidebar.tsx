@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { MenuSidebar } from '../../../types';
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Sidebar({ menu, sidebarWidth, headerHeight }: { menu: MenuSidebar; sidebarWidth: string; headerHeight: string }) {
     const route = window.location;
@@ -53,7 +52,7 @@ export default function Sidebar({ menu, sidebarWidth, headerHeight }: { menu: Me
                     </Box>
                     <Box mt={1} px={1}>
                         {menu.map((item, index) => {
-                            return <MenuItem menu={menu} index={index} pathname={route.pathname} key={'menu' + item.title + index} />;
+                            return <MenuItem menu={menu} index={index} pathname={route?.pathname || ''} key={'menu' + item.title + index} />;
                         })}
                     </Box>
                 </Box>
