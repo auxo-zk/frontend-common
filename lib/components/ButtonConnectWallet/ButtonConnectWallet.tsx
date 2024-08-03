@@ -85,10 +85,10 @@ function ConnectedButton({ address, requiedLogin }: { address: string; requiedLo
         await disconnectAsync();
         window.location.reload();
     }
-    async function login() {}
+
     useLayoutEffect(() => {
-        // setAddress(address);
-        setAddress('B62qmRKcdXqHe1SxukHQtWUHyMX3NMGCkvHnHao3VsdoBMNRDkQq6na');
+        setAddress(address);
+        // setAddress('B62qmRKcdXqHe1SxukHQtWUHyMX3NMGCkvHnHao3VsdoBMNRDkQq6na');
     }, [address]);
 
     useEffect(() => {

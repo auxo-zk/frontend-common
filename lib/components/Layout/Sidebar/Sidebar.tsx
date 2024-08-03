@@ -4,7 +4,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function Sidebar({ menu, sidebarWidth, headerHeight }: { menu: MenuSidebar; sidebarWidth: string; headerHeight: string }) {
-    const route = useLocation();
+    const route = window.location;
     return (
         <Box
             sx={(theme) => ({
