@@ -19,7 +19,7 @@ export default defineConfig({
         },
         copyPublicDir: false, // ! disable copy public folder
         rollupOptions: {
-            external: ['react', 'react/jsx-runtime', '@emotion/react', '@emotion/styled', 'react-router-dom'], // ! remove the code from bundle
+            external: ['react', 'react/jsx-runtime', '@emotion/react', '@emotion/styled', 'react-router-dom', '@mui', 'jotai', 'wagmi', 'viem', 'axios', 'react-quill', 'react-toastify'], // ! remove the code from bundle
         },
     },
 });
