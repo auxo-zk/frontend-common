@@ -1,15 +1,13 @@
 import { Box, Button, ClickAwayListener, Divider, MenuItem, Typography } from '@mui/material';
 import { useModalFunction } from '../../states/modal';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAccount, useChainId, useConnections, useDisconnect } from 'wagmi';
 import ModalListWalletConnect from './ModalListWalletConnect/ModalListWalletConnect';
 import { IconWallet } from '../../icons';
-import { Check, CheckCircleOutlineRounded, CheckCircleRounded, CopyAll, ExpandMore, Help, HourglassEmpty, LoginRounded, LogoutOutlined, LogoutRounded } from '@mui/icons-material';
+import { Check, CheckCircleOutlineRounded, CopyAll, Help, HourglassEmpty, LoginRounded, LogoutOutlined } from '@mui/icons-material';
 import { rotateInfinity } from '../../animations';
 import { infoChain, infoWallet } from '../../states/wallet';
 import { copyTextToClipboard, formatAddress } from '../../utils';
-import { checkValidAccessToken } from '../../states/user';
-import { verifyJwt } from 'lib/services';
 import { useCheckLogin, useSetAddressWallet } from 'lib/states/user/state';
 
 export function ButtonConnectWallet({ requiedLogin }: { requiedLogin: boolean }) {
@@ -86,7 +84,7 @@ function ConnectedButton({ address, requiedLogin }: { address: string; requiedLo
         window.location.reload();
     }
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         setAddress(address);
         // setAddress('B62qmRKcdXqHe1SxukHQtWUHyMX3NMGCkvHnHao3VsdoBMNRDkQq6na');
     }, [address]);
