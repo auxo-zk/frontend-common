@@ -4,10 +4,10 @@ import { KeyLocalStorage } from 'lib/constants';
 import { checkValidAccessToken } from './utils';
 import { verifyJwt } from 'lib/services';
 
-const accessToken = atomWithStorage(KeyLocalStorage.ACCESS_TOKEN, '');
-const addressWallet = atom<string>('');
+export const accessToken = atomWithStorage(KeyLocalStorage.ACCESS_TOKEN, '');
+export const addressWallet = atom<string>('');
 
-const validLogin = atom(async (get) => {
+export const validLogin = atom(async (get) => {
     const _accessToken = get(accessToken);
     const _addressWallet = get(addressWallet);
     if (!_addressWallet) return false;

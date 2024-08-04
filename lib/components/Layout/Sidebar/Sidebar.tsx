@@ -48,7 +48,7 @@ export default function Sidebar({ menu, sidebarWidth, headerHeight }: { menu: Me
                     sx={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', bgcolor: 'background.secondary', maxWidth: sidebarWidth, zIndex: 1, overflowY: 'auto' }}
                 >
                     <Box sx={{ height: headerHeight, display: 'flex', pl: 3, placeItems: 'center' }}>
-                        <img src={'/images/logo-sidebar'} alt="logo auxo" style={{ width: '90px', height: 'auto' }} />
+                        <img src={'/images/logo-sidebar.png'} alt="logo auxo" style={{ width: '90px', height: 'auto' }} />
                     </Box>
                     <Box mt={1} px={1}>
                         {menu.map((item, index) => {

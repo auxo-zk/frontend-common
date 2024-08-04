@@ -3,6 +3,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { checkValidAccessToken, IconMenuExplorer, IconUser, Layout } from 'lib/main';
 import { useThemeMode } from 'lib/main';
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import { useAccountEffect, useSwitchAccount } from 'wagmi';
 
 export default function App() {
@@ -23,7 +24,7 @@ export default function App() {
                 {
                     icon: IconUser,
                     title: 'Profile',
-                    url: '/profile',
+                    url: '/test2',
                     children: [] as { title: string; url: string }[],
                 },
                 {
@@ -34,9 +35,7 @@ export default function App() {
                 },
             ]}
         >
-            <Box>
-                <Button variant="contained">Hello</Button>
-            </Box>
+            <Outlet />
         </Layout>
     );
 }

@@ -15,7 +15,7 @@ import { useCheckLogin, useSetAddressWallet } from 'lib/states/user/state';
 export function ButtonConnectWallet({ requiedLogin }: { requiedLogin: boolean }) {
     const { isConnecting, address, isReconnecting } = useAccount();
 
-    if (isConnecting || isReconnecting) return <ConnectingButton />;
+    if (isConnecting) return <ConnectingButton />;
     if (address) return <ConnectedButton address={address} requiedLogin={requiedLogin} />;
     return <NotconnectedButton />;
 }
