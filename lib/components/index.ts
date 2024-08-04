@@ -16,3 +16,5 @@ export * from './BoxIntroducePage';
 export * from './BoxProfile';
 export * from './NoData';
 export * from './InputBanner';
+export * from './BoxTeamMember';
+export * from './BoxAddDocument';

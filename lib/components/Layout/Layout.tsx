@@ -1,4 +1,3 @@
-import 'react-quill/dist/quill.snow.css';
 import { ReactNode } from 'react';
 import { Box } from '@mui/material';
 import Sidebar from './Sidebar/Sidebar';
@@ -7,13 +6,12 @@ import { AppStateProvider } from '../AppStateProvider';
 import { MenuSidebar } from '../../types';
 import { ModalCustom } from '../ModalCustom';
 import { ToastNotifier } from '../ToastNotifier';
-import { walletConfig } from 'lib/states';
 
 export function Layout({ children, menu, requiedLogin }: { menu: MenuSidebar; children: ReactNode; requiedLogin: boolean }) {
     const sidebarWidth = '202px';
     const headerHeight = '64px';
     return (
-        <AppStateProvider>
+        <>
             <Box sx={{ position: 'relative' }}>
                 <Sidebar sidebarWidth={sidebarWidth} headerHeight={headerHeight} menu={menu} />
                 <Box
@@ -39,6 +37,6 @@ export function Layout({ children, menu, requiedLogin }: { menu: MenuSidebar; ch
             </Box>
             <ModalCustom />
             <ToastNotifier />
-        </AppStateProvider>
+        </>
     );
 }

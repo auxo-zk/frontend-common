@@ -1,5 +1,5 @@
 import { Container, TextField } from '@mui/material';
-import { BoxIntroducePage, BoxPrivateData, BoxProfile, InputBanner } from 'lib/components';
+import { BoxAddDocument, BoxIntroducePage, BoxPrivateData, BoxProfile, BoxTeamMember, InputBanner } from 'lib/components';
 import React from 'react';
 
 export default function Test2() {
@@ -23,6 +23,9 @@ export default function Test2() {
                 getProfile={() => {}}
                 editable={true}
             />
+            <BoxTeamMember members={[{ name: '', link: '', publicKey: '', role: '' }]} addTeamMember={() => {}} editTeamMember={() => {}} removeTeamMember={() => {}} />
+
+            <BoxAddDocument documents={[]} documentFiles={[]} addDocumentFiles={() => {}} deleteDocumentFiles={() => {}} deleteDocuments={() => {}} />
         </Container>
     );
 }
