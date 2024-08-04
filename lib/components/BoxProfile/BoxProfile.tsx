@@ -1,12 +1,23 @@
-import { Box, Grid, IconButton, TextField, Typography } from '@mui/material';
+import { Box, Grid, TextField, Typography } from '@mui/material';
 import { Avatar } from '../Avatar';
 import { updateProfileAvatar, updateProfileInfo, UpdateProfileInput, UserProfile } from 'lib/services';
-import { IconEdit } from 'lib/icons';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { ButtonLoading } from '../ButtonLoading';
 
-export function BoxProfile({ initData, role, editable, getProfile }: { initData: UserProfile; editable?: boolean; role: 'builder' | 'organizer'; getProfile: () => void }) {
+export function BoxProfile({
+    initData,
+    role,
+    editable,
+    getProfile,
+    titlePage,
+}: {
+    titlePage: string;
+    initData: UserProfile;
+    editable?: boolean;
+    role: 'builder' | 'organizer';
+    getProfile: () => void;
+}) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [editProfile, setEditProfile] = useState<UpdateProfileInput>({ name: initData.name, description: initData.description, role: initData.role, link: initData.link });
 
@@ -49,7 +60,7 @@ export function BoxProfile({ initData, role, editable, getProfile }: { initData:
     return (
         <Box>
             <Typography variant="h1" textTransform={'uppercase'}>
-                Builder Profile
+                {titlePage}
             </Typography>
             <Box sx={{ display: 'flex', placeItems: 'center', gap: 4, mt: 4 }}>
                 <Avatar

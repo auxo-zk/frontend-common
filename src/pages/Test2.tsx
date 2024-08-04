@@ -9,6 +9,7 @@ export default function Test2() {
                 <TextField label="Search..." type="text" name="search_committee" color="secondary" sx={{ mt: 3, maxWidth: '479px' }} fullWidth></TextField>
             </BoxIntroducePage>
             <BoxProfile
+                titlePage="Builder Profile"
                 initData={{
                     address: 'B62qmRKcdXqHe1SxukHQtWUHyMX3NMGCkvHnHao3VsdoBMNRDkQq6na',
                     img: 'https://storage.googleapis.com/auxo/7026aeb50306a8b6137f713cd3b6bcbacd8d1f068607ab1ffb55e2eb2b5f051f.png',
