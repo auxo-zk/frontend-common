@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
 import { CardCampaign } from 'lib/components';
 import { CardCourse } from 'lib/components/Card/CardCourse';
 import { Campaign, Course, getCampaigns, getCourses } from 'lib/services';
@@ -30,7 +30,7 @@ export default function Test() {
         fetchCampaign();
     }, []);
     return (
-        <Box>
+        <Container>
             <Grid container spacing={2}>
                 {courses.map((course, index) => {
                     return (
@@ -49,6 +49,6 @@ export default function Test() {
                     );
                 })}
             </Grid>
-        </Box>
+        </Container>
     );
 }

@@ -1,10 +1,11 @@
-import { TextField } from '@mui/material';
-import { BoxIntroducePage, BoxPrivateData, BoxProfile } from 'lib/components';
+import { Container, TextField } from '@mui/material';
+import { BoxIntroducePage, BoxPrivateData, BoxProfile, InputBanner } from 'lib/components';
 import React from 'react';
 
 export default function Test2() {
     return (
-        <div>
+        <Container>
+            <InputBanner src="https://vending-cdn.kootoro.com/torov-cms/upload/image/1669358914523-kh%C3%A1i%20ni%E1%BB%87m%20qu%E1%BA%A3ng%20c%C3%A1o%20banner%20tr%C3%AAn%20website.jpg"></InputBanner>
             <BoxIntroducePage title="Explore project" thumnail="/images/auxo-thumbnail1.png">
                 <TextField label="Search..." type="text" name="search_committee" color="secondary" sx={{ mt: 3, maxWidth: '479px' }} fullWidth></TextField>
             </BoxIntroducePage>
@@ -22,6 +23,6 @@ export default function Test2() {
                 getProfile={() => {}}
                 editable={true}
             />
-        </div>
+        </Container>
     );
 }

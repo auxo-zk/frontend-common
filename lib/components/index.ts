@@ -15,3 +15,4 @@ export * from './Table';
 export * from './BoxIntroducePage';
 export * from './BoxProfile';
 export * from './NoData';
+export * from './InputBanner';

@@ -200,7 +200,7 @@ export function getThemedComponent(theme: Theme): ThemeOptions {
                 },
                 styleOverrides: {
                     root: {
-                        maxWidth: '1078px',
+                        maxWidth: '1078px!important',
                     },
                 },
             },
