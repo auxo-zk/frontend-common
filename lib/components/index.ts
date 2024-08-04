@@ -12,3 +12,5 @@ export * from './ButtonLoading';
 export * from './BoxPrivateData';
 export * from './CustomEditor';
 export * from './Table';
+export * from './BoxIntroducePage';
+export * from './BoxProfile';

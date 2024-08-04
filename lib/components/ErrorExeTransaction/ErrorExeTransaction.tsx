@@ -26,7 +26,8 @@ export function ErrorExeTransaction({ error }: { error: any }) {
                     <Typography
                         key={id + index}
                         mt={index > 0 ? 1 : 0}
-                        variant={mess.type == 'shortMess' ? 'h6' : 'body2'}
+                        fontWeight={mess.type == 'shortMess' ? '600' : '400'}
+                        variant={mess.type == 'shortMess' ? 'body1' : 'body2'}
                         sx={{ color: mess.type == 'shortMess' ? 'text.primary' : '' }}
                         component={'pre'}
                     >

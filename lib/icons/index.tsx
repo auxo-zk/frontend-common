@@ -185,3 +185,19 @@ export const IconEmpty: SvgComponent = (props) => {
         </SvgIcon>
     );
 };
+
+export const IconEdit: SvgComponent = (props) => {
+    return (
+        <SvgIcon {...props} viewBox="0 0 24 22" fill="none">
+            <path d="M8.32062 21H22.5125" stroke={'#043E35'} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+                d="M16.9734 1.72567C17.1972 1.496 17.4648 1.31347 17.7602 1.18884C18.0557 1.06421 18.3731 1 18.6938 1C19.0145 1 19.3319 1.06421 19.6274 1.18884C19.9228 1.31347 20.1904 1.496 20.4142 1.72567C20.8709 2.19445 21.1265 2.82307 21.1265 3.47758C21.1265 4.13208 20.8709 4.76071 20.4142 5.22948L6.07619 19.8313L1.48749 20.9993L2.6344 16.3296L16.9734 1.72567Z"
+                fill="#043E35"
+                stroke="#043E35"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </SvgIcon>
+    );
+};
