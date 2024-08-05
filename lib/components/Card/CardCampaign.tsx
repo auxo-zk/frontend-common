@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 import { fundingOption } from 'lib/constants';
 import { StateCampaign } from './StateCampaign';
 
-export function CardCampaign({ data }: { data: Campaign }) {
+export function CardCampaign({ data, toLink = '#' }: { data: Campaign; toLink?: string }) {
     return (
         <Card avatar={data.avatar} banner={data.banner} sxBanner={{ minHeight: '150px' }}>
             <Box display={'flex'} sx={{ placeItems: 'center' }} mb={4}>
-                <Link to={`/explorer/campaigns/${data.campaignId}`} style={{ textDecoration: 'none', color: 'unset' }}>
+                <Link to={toLink} style={{ textDecoration: 'none', color: 'unset' }}>
                     <Typography variant="h6" fontWeight={600} sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '2', WebkitBoxOrient: 'vertical' }}>
                         {data.name}
                     </Typography>

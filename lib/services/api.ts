@@ -74,7 +74,7 @@ export async function getCampaign(idCampaign: string): Promise<Campaign> {
 
 function filterDataCourse(data: any): Course {
     return {
-        id: data?.projectId || '',
+        id: data?.projectId + '' || '#',
         name: data?.ipfsData?.name || '',
         avatar: data?.ipfsData?.avatarImage || '',
         banner: data?.ipfsData?.coverImage || '',
