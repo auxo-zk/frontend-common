@@ -1,4 +1,4 @@
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Button, Container, Grid } from '@mui/material';
 import { CardCampaign } from 'lib/components';
 import { CardCourse } from 'lib/components/Card/CardCourse';
 import { Campaign, Course, getCampaigns, getCourses } from 'lib/services';
@@ -35,7 +35,9 @@ export default function Test() {
                 {courses.map((course, index) => {
                     return (
                         <Grid key={course.id + index} item xs={12} xsm={6} sm={4} lg={3}>
-                            <CardCourse data={course} />
+                            <CardCourse data={course}>
+                                <Button fullWidth>join</Button>
+                            </CardCourse>
                         </Grid>
                     );
                 })}
