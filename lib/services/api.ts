@@ -1,7 +1,7 @@
 import { clientStorage } from 'lib/constants';
 import axios from 'axios';
 import { apiUrl } from './apiUrl';
-import { Campaign, CampaignFundraising, CampaignState, Course, UpdateProfileInput, UserProfile } from './types';
+import { Campaign, CampaignFundraising, CampaignState, Course, DraftCourse, UpdateProfileInput, UserProfile } from './types';
 
 export async function verifyJwt(jwt?: string) {
     try {
@@ -58,8 +58,8 @@ function filterDataCampaign(item: any): Campaign {
         questions: item.ipfsData?.questions || [],
     };
 }
-export async function getCampaigns(): Promise<Campaign[]> {
-    const response = await axios.get(apiUrl.campaign);
+export async function getCampaigns(addressUser?: string): Promise<Campaign[]> {
+    const response = await axios.get(apiUrl.campaign + (addressUser ? `?owner=${addressUser}` : ''));
     // console.log('getCampaigns', response);
     const data = response.data;
 
@@ -117,7 +117,7 @@ function filterDataCourse(data: any): Course {
         member: data?.ipfsData?.members || [],
         solution: data?.ipfsData?.solution || '',
         problemStatement: data?.ipfsData?.problemStatement || '',
-        challengesAndRisk: data?.ipfsData?.challengesAndRisks || '',
+        challengesAndRisk: data?.ipfsData?.challengesAndRisk || '',
     };
 }
 export async function getCourses(addressUser?: string): Promise<Course[]> {
@@ -130,6 +130,42 @@ export async function getCourse(idCourse: string): Promise<Course> {
     const response = await axios.get(apiUrl.courses + `/${idCourse}`);
     // console.log('getCourse', response);
     return filterDataCourse(response.data);
+}
+
+function filterDataDraftCourse(data: any): DraftCourse {
+    return {
+        id: data._id + '' || '#',
+        name: data.ipfsData?.name || '',
+        avatar: data.ipfsData?.avatarImage || '',
+        banner: data.ipfsData?.coverImage || '',
+        date: new Date().toLocaleDateString(),
+        description: data.ipfsData?.description || '',
+        documents: data.ipfsData?.documents || [],
+        member: data.ipfsData?.members || [],
+        solution: data.ipfsData?.solution || '',
+        problemStatement: data.ipfsData?.problemStatement || '',
+        challengesAndRisk: data.ipfsData?.challengesAndRisk || '',
+    };
+}
+export async function getDraftCourses(): Promise<DraftCourse[]> {
+    const jwt = clientStorage.ACCESS_TOKEN();
+    const response = await axios.get(apiUrl.draftsCourse, {
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+        },
+    });
+    // console.log('getDraftCourses', response);
+    return response.data.map((item: any) => filterDataDraftCourse(item));
+}
+export async function getDraftCourse(idDraft: string): Promise<DraftCourse> {
+    const jwt = clientStorage.ACCESS_TOKEN();
+    const response = await axios.get(apiUrl.draftsCourse + '/' + idDraft, {
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+        },
+    });
+    // console.log('getDraftCourses', response);
+    return filterDataDraftCourse(response.data);
 }
 
 //! #######################################################################################################################

@@ -15,6 +15,8 @@ export type Course = {
     challengesAndRisk: string;
 };
 
+export type DraftCourse = Omit<Course, 'totalClaimedAmount' | 'totalFundedAmount'>;
+
 export enum CampaignState {
     'UPCOMING',
     'APPLICATION',

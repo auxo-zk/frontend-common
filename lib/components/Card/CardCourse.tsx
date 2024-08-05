@@ -4,10 +4,22 @@ import { Card } from './Card';
 import { Link } from 'react-router-dom';
 import { ReactNode } from 'react';
 
-export function CardCourse({ data, children, toLink = '#', subChildren }: { data: Course; children?: ReactNode; toLink?: string; subChildren?: ReactNode }) {
+export function CardCourse({
+    data,
+    children,
+    toLink = '#',
+    subChildren,
+    target,
+}: {
+    data: Course;
+    children?: ReactNode;
+    toLink?: string;
+    subChildren?: ReactNode;
+    target?: React.HTMLAttributeAnchorTarget;
+}) {
     return (
         <Card avatar={data.avatar} banner={data.banner} subChildren={subChildren} sxBanner={{ minHeight: '102px' }}>
-            <Link to={toLink} style={{ textDecoration: 'none', color: 'unset' }}>
+            <Link to={toLink} target={target} style={{ textDecoration: 'none', color: 'unset' }}>
                 <Typography variant="h6" fontWeight={600} mt={1} sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '2', WebkitBoxOrient: 'vertical' }}>
                     {data.name}
                 </Typography>
