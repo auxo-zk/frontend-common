@@ -51,6 +51,30 @@ export type Campaign = {
     questions: CampaignQuestion[];
 };
 
+export type CampaignFundraising = {
+    campaignId: string;
+    campaignName: string;
+    fundedAmount: number;
+    claimedAmount: number;
+    targetAmount: number;
+    raiseInfo: {
+        scope: string;
+        budgetRequired: string;
+        etc: string;
+    }[];
+    documents: FileSaved[];
+    scopeOfWorks: ScopeOfWork[];
+    questions: CampaignQuestion[];
+    answers: string[];
+    ownerAddress: string;
+    timeline: {
+        startParticipation: string;
+        startFunding: string;
+        startRequesting: string;
+    };
+    campaignState: number;
+};
+
 export type User = {};
 
 export type FileSaved = {
@@ -80,4 +104,11 @@ export type UpdateProfileInput = {
     link: string;
     description: string;
     role: string;
+};
+
+export type ScopeOfWork = {
+    deadline: string;
+    information: string;
+    milestone: string;
+    raisingAmount: string;
 };

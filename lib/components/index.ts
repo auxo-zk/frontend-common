@@ -20,3 +20,4 @@ export * from './BoxTeamMember';
 export * from './BoxAddDocument';
 export * from './ButtonGroup';
 export * from './BoxListDocuments';
+export * from './StackTeamMember';

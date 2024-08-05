@@ -1,7 +1,7 @@
 import { clientStorage } from 'lib/constants';
 import axios from 'axios';
 import { apiUrl } from './apiUrl';
-import { Campaign, CampaignState, Course, UpdateProfileInput, UserProfile } from './types';
+import { Campaign, CampaignFundraising, CampaignState, Course, UpdateProfileInput, UserProfile } from './types';
 
 export async function verifyJwt(jwt?: string) {
     try {
@@ -18,6 +18,7 @@ export async function verifyJwt(jwt?: string) {
         return false;
     }
 }
+//! Campaigns #######################################################################################################################
 
 function filterDataCampaign(item: any): Campaign {
     const timeLine = {
@@ -70,7 +71,37 @@ export async function getCampaign(idCampaign: string): Promise<Campaign> {
     return filterDataCampaign(response.data);
 }
 
-//! #######################################################################################################################
+function filterDataCampaignFundraising(item: any): CampaignFundraising {
+    return {
+        campaignId: item.campaignId + '',
+        campaignName: item.campaign?.ipfsData?.name || '',
+        fundedAmount: item.fundedAmount / 10 ** 9 || 0,
+        claimedAmount: item.claimedAmount / 10 ** 9 || 0,
+        targetAmount:
+            item.ipfsData?.scopeOfWorks?.reduce((accumulator: number, item: any) => {
+                return accumulator + Number(item.raisingAmount);
+            }, 0) || 0,
+        raiseInfo: item.raiseInfo || [],
+        documents: item.ipfsData?.documents || [],
+        scopeOfWorks: item.ipfsData?.scopeOfWorks || [],
+        questions: item.campaign?.ipfsData?.questions || [],
+        answers: item.ipfsData?.answers || [],
+        ownerAddress: item.campaign?.owner || '',
+        timeline: {
+            startParticipation: item.campaign?.ipfsData?.timeline?.startParticipation || '',
+            startFunding: item.campaign?.ipfsData?.timeline?.startFunding || '',
+            startRequesting: item.campaign?.ipfsData?.timeline?.startRequesting || '',
+        },
+        campaignState: item.campaign?.state || 0,
+    };
+}
+export async function getFundraisingInfoByProjectId(projectId: string): Promise<CampaignFundraising[]> {
+    const response = await axios.get(apiUrl.getFundraisingInfoByProjectId(projectId));
+    // console.log('getCampaignsJoinedByProjectId', response);
+    return response.data.map((item: any, index: number) => filterDataCampaignFundraising(item));
+}
+
+//! Courses #######################################################################################################################
 
 function filterDataCourse(data: any): Course {
     return {

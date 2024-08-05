@@ -1,10 +1,12 @@
 import { SaveAltRounded } from '@mui/icons-material';
 import { Box, Divider, Typography } from '@mui/material';
 import { IconFolder } from 'lib/icons';
-import { FileSaved } from 'lib/services';
+import { FileSaved, MemberData } from 'lib/services';
 import { formatAddress } from 'lib/utils';
+import { StackTeamMember } from '../StackTeamMember';
+import { imagePath } from 'lib/constants';
 
-export function BoxListDocuments({ documents }: { documents: FileSaved[] }) {
+export function BoxListDocuments({ documents, members }: { documents: FileSaved[]; members: MemberData[] }) {
     return (
         <Box sx={{ minWidth: '309px', zIndex: -1 }}>
             <Box sx={{ borderRadius: '12px', bgcolor: 'background.secondary', p: { xs: 2, xsm: 3 }, boxShadow: 3 }}>
@@ -35,6 +37,15 @@ export function BoxListDocuments({ documents }: { documents: FileSaved[] }) {
                 )}
 
                 <Divider sx={{ mt: 3.5 }} />
+
+                <Box mt={2}>
+                    <Typography variant="h6" mb={2.5}>
+                        Team Member
+                    </Typography>
+                    {members.map((member, index) => {
+                        return <StackTeamMember key={index} sx={{ mb: 1 }} name={member.name} urlImage={imagePath.DEFAULT_AVATAR} desc={member.role} />;
+                    })}
+                </Box>
             </Box>
         </Box>
     );
