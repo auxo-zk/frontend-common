@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { AddAPhotoRounded } from '@mui/icons-material';
+import { imagePath } from 'lib/constants';
 
 export type TAvatarProps = {
     src?: string;
@@ -10,11 +11,7 @@ export type TAvatarProps = {
 };
 export function Avatar({ alt = 'user avatar', src, size, onChange, editable = true }: TAvatarProps) {
     function changeInput(file: FileList | null) {
-        onChange
-            ? onChange(file)
-            : () => {
-                  return;
-              };
+        onChange?.(file);
     }
     return (
         <Box
@@ -30,7 +27,7 @@ export function Avatar({ alt = 'user avatar', src, size, onChange, editable = tr
                 },
             }}
         >
-            <img src={src || ''} alt={alt} style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
+            <img src={src || imagePath.DEFAULT_AVATAR} alt={alt} style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
             {editable && (
                 <>
                     <Box

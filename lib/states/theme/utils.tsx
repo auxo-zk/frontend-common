@@ -272,7 +272,6 @@ export function getThemedComponent(theme: Theme): ThemeOptions {
                         '--focusedOutlineInputBorderColor': theme.palette.primary.light,
                         color: theme.palette.primary.main,
                     },
-
                     colorSecondary: {
                         '--outlineInputBorderColor': theme.palette.secondary.main,
                         '--hoverOutlineInputBorderColor': theme.palette.secondary.main,
