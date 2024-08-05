@@ -132,6 +132,12 @@ export async function getCourse(idCourse: string): Promise<Course> {
     return filterDataCourse(response.data);
 }
 
+export async function getListProjectJoinedInCampaign(campaignId: string): Promise<Course[]> {
+    const response = await axios.get(apiUrl.getListProjectJoinedInCampaign(campaignId));
+    // console.log('getListProjectJoinedInCampaign', response);
+    return response.data.map((item: any) => filterDataCourse(item));
+}
+
 function filterDataDraftCourse(data: any): DraftCourse {
     return {
         id: data._id + '' || '#',
