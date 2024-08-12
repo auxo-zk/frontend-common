@@ -7,8 +7,8 @@ export const KeyLocalStorage = {
 };
 
 export const clientStorage = {
-    THEME: () => localStorage.getItem(KeyLocalStorage.THEME) || '',
-    ACCESS_TOKEN: () => localStorage.getItem(KeyLocalStorage.ACCESS_TOKEN) || '',
+    THEME: () => JSON.parse(localStorage.getItem(KeyLocalStorage.THEME) || '""'),
+    ACCESS_TOKEN: () => JSON.parse(localStorage.getItem(KeyLocalStorage.ACCESS_TOKEN) || '""'),
 };
 
 export const fundingOption = ['Private Grant', 'Public Funding', 'Unknow'];
