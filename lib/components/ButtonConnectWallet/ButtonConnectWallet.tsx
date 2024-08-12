@@ -1,14 +1,18 @@
 import { Box, Button, ClickAwayListener, Divider, MenuItem, Typography } from '@mui/material';
 import { useModalFunction } from '../../states/modal';
 import { useEffect, useState } from 'react';
-import { useAccount, useChainId, useConnections, useDisconnect } from 'wagmi';
+import { useAccount, useChainId, useConnections, useDisconnect, useSignMessage } from 'wagmi';
 import ModalListWalletConnect from './ModalListWalletConnect/ModalListWalletConnect';
 import { IconWallet } from '../../icons';
 import { Check, CheckCircleOutlineRounded, CopyAll, Help, HourglassEmpty, LoginRounded, LogoutOutlined } from '@mui/icons-material';
 import { rotateInfinity } from '../../animations';
 import { infoChain, infoWallet } from '../../states/wallet';
 import { copyTextToClipboard, formatAddress } from '../../utils';
-import { useCheckLogin, useSetAddressWallet } from 'lib/states/user/state';
+import { useCheckLogin, useSetAccessToken, useSetAddressWallet } from 'lib/states/user/state';
+import { getServerSignature, loginUser } from 'lib/services';
+import { toast } from 'react-toastify';
+import { ErrorExeTransaction } from '../ErrorExeTransaction';
+import useSwitchToSelectedChain from 'lib/states/wallet/hooks';
 
 export function ButtonConnectWallet({ requiedLogin }: { requiedLogin: boolean }) {
     const { isConnecting, address, isReconnecting } = useAccount();
@@ -196,8 +200,29 @@ export function BoxCheckLogin({ address }: { address: string }) {
 
 function MenuItemLogin() {
     const [value] = useCheckLogin();
-
-    async function login() {}
+    const { address } = useAccount();
+    const { signMessageAsync } = useSignMessage();
+    const [isLogin, setIsLogin] = useState(false);
+    const { switchToChainSelected } = useSwitchToSelectedChain();
+    const setAccessToken = useSetAccessToken();
+    async function login() {
+        setIsLogin(true);
+        try {
+            if (!address) throw Error('Address not found');
+            await switchToChainSelected();
+            const serverSignature = await getServerSignature();
+            console.log(serverSignature);
+            const signature = await signMessageAsync({ message: serverSignature.msg, account: address });
+            const responseLogin = await loginUser({ role: 0, address: address, signature: signature, serverSignature: serverSignature });
+            console.log(responseLogin);
+            setAccessToken(responseLogin);
+            toast.success('Login success');
+        } catch (error) {
+            console.log(error);
+            toast.error(<ErrorExeTransaction error={error} />);
+        }
+        setIsLogin(false);
+    }
 
     if (value.state === 'loading') {
         return (
@@ -220,9 +245,9 @@ function MenuItemLogin() {
             );
         }
         return (
-            <MenuItem sx={{ mt: 1 }} onClick={() => login()}>
+            <MenuItem sx={{ mt: 1 }} onClick={() => login()} disabled={isLogin}>
                 <Typography variant="body2" color={'text.primary'} fontWeight={500}>
-                    Login
+                    {isLogin ? 'Await login' : 'Login'}
                 </Typography>
                 <LoginRounded sx={{ ml: 'auto' }} />
             </MenuItem>

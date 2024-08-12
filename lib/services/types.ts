@@ -1,3 +1,16 @@
+export type ServerSignature = {
+    msg: string;
+    msgHash: string;
+    signature: string;
+};
+
+export type DataPostAuthen = {
+    role: 0 | 1;
+    address: string;
+    signature: string;
+    serverSignature: ServerSignature;
+};
+
 export type Course = {
     id: string;
     name: string;
@@ -12,7 +25,20 @@ export type Course = {
     member: MemberData[];
     solution: string;
     problemStatement: string;
-    challengesAndRisk: string;
+    challengeAndRisk: string;
+};
+
+export type DataCreateCourse = {
+    name: string;
+    avatarImage: string;
+    coverImage: string;
+    publicKey: string;
+    description: string;
+    problemStatement: string;
+    solution: string;
+    challengeAndRisk: string;
+    members: MemberData[];
+    documents: FileSaved[];
 };
 
 export type DraftCourse = Omit<Course, 'totalClaimedAmount' | 'totalFundedAmount'>;

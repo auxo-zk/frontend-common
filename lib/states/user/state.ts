@@ -21,3 +21,5 @@ export const validLogin = atom(async (get) => {
 
 export const useSetAddressWallet = () => useSetAtom(addressWallet);
 export const useCheckLogin = () => useAtom(loadable(validLogin));
+
+export const useSetAccessToken = () => useSetAtom(accessToken);

@@ -1,7 +1,17 @@
 import { clientStorage } from 'lib/constants';
 import axios from 'axios';
 import { apiUrl } from './apiUrl';
-import { Campaign, CampaignFundraising, CampaignState, Course, DraftCourse, UpdateProfileInput, UserProfile } from './types';
+import { Campaign, CampaignFundraising, CampaignState, Course, DataCreateCourse, DataPostAuthen, DraftCourse, ServerSignature, UpdateProfileInput, UserProfile } from './types';
+
+export async function getServerSignature(): Promise<ServerSignature> {
+    const response = await axios.get(apiUrl.authen);
+    return response.data;
+}
+
+export async function loginUser(data: DataPostAuthen): Promise<string> {
+    const response = await axios.post(apiUrl.authen, data);
+    return response.data;
+}
 
 export async function verifyJwt(jwt?: string) {
     try {
@@ -104,7 +114,7 @@ export async function getFundraisingInfoByProjectId(projectId: string): Promise<
 //! Courses #######################################################################################################################
 
 function filterDataCourse(data: any): Course {
-    console.log('challengesAndRisk:', data.ipfsData?.challengesAndRisk);
+    // console.log('challengeAndRisk:', data.ipfsData?.challengeAndRisk);
     return {
         id: data?.projectId + '' || '#',
         name: data?.ipfsData?.name || '',
@@ -118,7 +128,7 @@ function filterDataCourse(data: any): Course {
         member: data?.ipfsData?.members || [],
         solution: data?.ipfsData?.solution || '',
         problemStatement: data?.ipfsData?.problemStatement || '',
-        challengesAndRisk: data?.ipfsData?.challengesAndRisk || '',
+        challengeAndRisk: data?.ipfsData?.challengeAndRisk || '',
     };
 }
 export async function getCourses(addressUser?: string): Promise<Course[]> {
@@ -140,7 +150,7 @@ export async function getListProjectJoinedInCampaign(campaignId: string): Promis
 }
 
 function filterDataDraftCourse(data: any): DraftCourse {
-    console.log('challengesAndRisk:', data.ipfsData?.challengesAndRisk);
+    // console.log('challengeAndRisk:', data.ipfsData?.challengeAndRisk);
     return {
         id: data._id + '' || '#',
         name: data.ipfsData?.name || '',
@@ -152,7 +162,7 @@ function filterDataDraftCourse(data: any): DraftCourse {
         member: data.ipfsData?.members || [],
         solution: data.ipfsData?.solution || '',
         problemStatement: data.ipfsData?.problemStatement || '',
-        challengesAndRisk: data.ipfsData?.challengesAndRisk || '',
+        challengeAndRisk: data.ipfsData?.challengeAndRisk || '',
     };
 }
 export async function getDraftCourses(): Promise<DraftCourse[]> {
@@ -174,6 +184,16 @@ export async function getDraftCourse(idDraft: string): Promise<DraftCourse> {
     });
     // console.log('getDraftCourses', response);
     return filterDataDraftCourse(response.data);
+}
+
+export async function createDraftCourse(data: DataCreateCourse): Promise<any> {
+    const jwt = clientStorage.ACCESS_TOKEN();
+    const response = await axios.post(apiUrl.draftsCourse, data, {
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+        },
+    });
+    return response;
 }
 
 //! #######################################################################################################################
