@@ -13,13 +13,13 @@ import { getServerSignature, loginUser } from 'lib/services';
 import { toast } from 'react-toastify';
 import { ErrorExeTransaction } from '../ErrorExeTransaction';
 import useSwitchToSelectedChain from 'lib/states/wallet/hooks';
-import { env } from 'lib/constants';
+import { USER_ROLE } from 'lib/types';
 
-export function ButtonConnectWallet({ requiedLogin }: { requiedLogin: boolean }) {
+export function ButtonConnectWallet({ requiedLogin, role }: { requiedLogin: boolean; role: USER_ROLE }) {
     const { isConnecting, address, isReconnecting } = useAccount();
 
     if (isConnecting) return <ConnectingButton />;
-    if (address) return <ConnectedButton address={address} requiedLogin={requiedLogin} />;
+    if (address) return <ConnectedButton address={address} requiedLogin={requiedLogin} role={role} />;
     return <NotconnectedButton />;
 }
 function NotconnectedButton() {
@@ -57,7 +57,7 @@ function ConnectingButton() {
     );
 }
 
-function ConnectedButton({ address, requiedLogin }: { address: string; requiedLogin: boolean }) {
+function ConnectedButton({ address, requiedLogin, role }: { address: string; requiedLogin: boolean; role: USER_ROLE }) {
     const setAddress = useSetAddressWallet();
     const [open, setOpen] = useState(false);
     const [copied, setCopied] = useState(false);
@@ -107,7 +107,7 @@ function ConnectedButton({ address, requiedLogin }: { address: string; requiedLo
                     <Box component={'span'} sx={{ display: { sm: 'flex', xs: 'none' } }}>
                         {formatAddress(address)}
                     </Box>
-                    {requiedLogin && <BoxCheckLogin address={address} />}
+                    {requiedLogin && <BoxCheckLogin address={address} role={role} />}
                     <IconWallet fontSize="large" sx={{ display: { sm: 'none', xs: 'block' } }} />
                 </Button>
                 {open ? (
@@ -154,7 +154,7 @@ function ConnectedButton({ address, requiedLogin }: { address: string; requiedLo
                                 {copied ? <Check sx={{ fontSize: '20px' }} /> : <CopyAll sx={{ fontSize: '20px' }} />} {/* Thay đổi icon dựa trên trạng thái */}
                             </Box>
                         </MenuItem>
-                        {requiedLogin ? <MenuItemLogin /> : null}
+                        {requiedLogin ? <MenuItemLogin role={role} /> : null}
                         <MenuItem sx={{ mt: 1 }} onClick={() => clickDisconnect()}>
                             <Typography variant="body2" color={'text.primary'} fontWeight={500}>
                                 Disconnect
@@ -168,7 +168,7 @@ function ConnectedButton({ address, requiedLogin }: { address: string; requiedLo
     );
 }
 
-export function BoxCheckLogin({ address }: { address: string }) {
+export function BoxCheckLogin({ address, role }: { address: string; role: USER_ROLE }) {
     const [value] = useCheckLogin();
     return (
         <Box component={'span'} sx={{ display: { sm: 'flex', xs: 'none' }, placeItems: 'baseline', justifyContent: 'end', width: '100%' }}>
@@ -199,7 +199,7 @@ export function BoxCheckLogin({ address }: { address: string }) {
     );
 }
 
-function MenuItemLogin() {
+function MenuItemLogin({ role }: { role: USER_ROLE }) {
     const [value] = useCheckLogin();
     const { address } = useAccount();
     const { signMessageAsync } = useSignMessage();
@@ -214,7 +214,7 @@ function MenuItemLogin() {
             const serverSignature = await getServerSignature();
             console.log(serverSignature);
             const signature = await signMessageAsync({ message: serverSignature.msg, account: address });
-            const responseLogin = await loginUser({ role: env.VITE_APP_USER_ROLE == 'builder' ? 0 : 1, address: address, signature: signature, serverSignature: serverSignature });
+            const responseLogin = await loginUser({ role: role == 'builder' ? 0 : 1, address: address, signature: signature, serverSignature: serverSignature });
             console.log(responseLogin);
             setAccessToken(responseLogin);
             toast.success('Login success');

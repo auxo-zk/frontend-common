@@ -11,6 +11,7 @@ export default function App() {
         <AppStateProvider>
             <WalletProvider wagmiConfig={config} queryClient={queryClient}>
                 <Layout
+                    role="builder"
                     requiedLogin={true}
                     menu={[
                         {

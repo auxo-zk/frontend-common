@@ -3,11 +3,11 @@ import { Box } from '@mui/material';
 import Sidebar from './Sidebar/Sidebar';
 import Header from './Header/Header';
 import { AppStateProvider } from '../AppStateProvider';
-import { MenuSidebar } from '../../types';
+import { MenuSidebar, USER_ROLE } from '../../types';
 import { ModalCustom } from '../ModalCustom';
 import { ToastNotifier } from '../ToastNotifier';
 
-export function Layout({ children, menu, requiedLogin }: { menu: MenuSidebar; children: ReactNode; requiedLogin: boolean }) {
+export function Layout({ children, menu, requiedLogin, role }: { menu: MenuSidebar; children: ReactNode; requiedLogin: boolean; role: USER_ROLE }) {
     const sidebarWidth = '202px';
     const headerHeight = '64px';
     return (
@@ -25,7 +25,7 @@ export function Layout({ children, menu, requiedLogin }: { menu: MenuSidebar; ch
                         backgroundSize: '975px auto',
                     }}
                 >
-                    <Header headerHeight={headerHeight} requiedLogin={requiedLogin}></Header>
+                    <Header headerHeight={headerHeight} requiedLogin={requiedLogin} role={role}></Header>
                     <Box
                         sx={{
                             minHeight: `calc(100svh - ${headerHeight})`,

@@ -3,8 +3,9 @@ import { Box, Container } from '@mui/material';
 import { ButtonConnectWallet } from '../../ButtonConnectWallet';
 import { useEffect, useState } from 'react';
 import { ButtonSelectChain } from '../../ButtonSelectChain';
+import { USER_ROLE } from 'lib/types';
 
-export default function Header({ headerHeight, requiedLogin }: { headerHeight: string; requiedLogin: boolean }) {
+export default function Header({ headerHeight, requiedLogin, role }: { headerHeight: string; requiedLogin: boolean; role: USER_ROLE }) {
     const [isScrollDown, setIsScrollDown] = useState<boolean>(false);
 
     useEffect(() => {
@@ -40,7 +41,7 @@ export default function Header({ headerHeight, requiedLogin }: { headerHeight: s
                 </Box>
                 <Box ml={'auto'}></Box>
                 <ButtonSelectChain />
-                <ButtonConnectWallet requiedLogin={requiedLogin} />
+                <ButtonConnectWallet requiedLogin={requiedLogin} role={role} />
             </Container>
         </Box>
     );
