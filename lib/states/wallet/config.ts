@@ -1,6 +1,6 @@
 import { createConfig, http } from 'wagmi';
 import { arbitrum, bscTestnet, arbitrumSepolia } from 'wagmi/chains';
-import { createClient } from 'viem';
+import { Chain, createClient } from 'viem';
 import { injected, walletConnect } from 'wagmi/connectors';
 import { IconARB, IconBNB, IconMetamask, IconWalletConnect, SvgComponent, WalletName } from 'crypto-token-icon';
 declare module 'wagmi' {
@@ -9,11 +9,26 @@ declare module 'wagmi' {
     }
 }
 
+export const auxoDevNet = {
+    id: 31337,
+    name: 'Auxo DevNet',
+    nativeCurrency: {
+        name: 'Ether',
+        symbol: 'ETH',
+        decimals: 18,
+    },
+    rpcUrls: {
+        default: {
+            http: ['https://educhain-explorer.auxo.fund'],
+        },
+    },
+} as const satisfies Chain;
+
 export type AppChainId = ReturnType<typeof walletConfig>['chains'][number]['id'];
 
 export const walletConfig = (walletConnectId: string) =>
     createConfig({
-        chains: [arbitrumSepolia, arbitrum],
+        chains: [auxoDevNet, arbitrumSepolia, arbitrum],
         connectors: [
             injected({ target: 'metaMask' }),
             walletConnect({
@@ -39,6 +54,10 @@ export const infoChain: { [k in AppChainId]: { logoChain: SvgComponent; name: st
     [arbitrumSepolia.id]: {
         logoChain: IconARB,
         name: 'Arbitrum Sepolia',
+    },
+    [auxoDevNet.id]: {
+        logoChain: IconARB,
+        name: 'Auxo DevNet',
     },
     // [bscTestnet.id]: {
     //     logoChain: IconBNB,

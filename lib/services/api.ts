@@ -104,6 +104,7 @@ export async function getFundraisingInfoByProjectId(projectId: string): Promise<
 //! Courses #######################################################################################################################
 
 function filterDataCourse(data: any): Course {
+    console.log('challengesAndRisk:', data.ipfsData?.challengesAndRisk);
     return {
         id: data?.projectId + '' || '#',
         name: data?.ipfsData?.name || '',
@@ -117,7 +118,7 @@ function filterDataCourse(data: any): Course {
         member: data?.ipfsData?.members || [],
         solution: data?.ipfsData?.solution || '',
         problemStatement: data?.ipfsData?.problemStatement || '',
-        challengesAndRisk: data?.ipfsData?.challengesAndRisks || '',
+        challengesAndRisk: data?.ipfsData?.challengesAndRisk || '',
     };
 }
 export async function getCourses(addressUser?: string): Promise<Course[]> {
@@ -139,6 +140,7 @@ export async function getListProjectJoinedInCampaign(campaignId: string): Promis
 }
 
 function filterDataDraftCourse(data: any): DraftCourse {
+    console.log('challengesAndRisk:', data.ipfsData?.challengesAndRisk);
     return {
         id: data._id + '' || '#',
         name: data.ipfsData?.name || '',
@@ -150,7 +152,7 @@ function filterDataDraftCourse(data: any): DraftCourse {
         member: data.ipfsData?.members || [],
         solution: data.ipfsData?.solution || '',
         problemStatement: data.ipfsData?.problemStatement || '',
-        challengesAndRisk: data.ipfsData?.challengesAndRisks || '',
+        challengesAndRisk: data.ipfsData?.challengesAndRisk || '',
     };
 }
 export async function getDraftCourses(): Promise<DraftCourse[]> {
