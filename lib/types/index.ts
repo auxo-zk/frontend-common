@@ -2,6 +2,20 @@ import BigNumberJS from 'bignumber.js';
 import { SvgComponent } from 'crypto-token-icon';
 import { ReactNode } from 'react';
 
+export type APP_ENV = 'development' | 'production' | 'staging';
+export type USER_ROLE = 'builder' | 'organizer' | 'investor';
+declare global {
+    interface ImportMetaEnv {
+        readonly VITE_APP_ENV: APP_ENV;
+        readonly VITE_APP_USER_ROLE: USER_ROLE;
+        // more env variables...
+    }
+
+    interface ImportMeta {
+        readonly env: ImportMetaEnv;
+    }
+}
+
 export type BaseProviderProps = { children: ReactNode };
 
 export type MenuSidebar = { icon: SvgComponent; title: string; url: string; children: { title: string; url: string }[] }[];

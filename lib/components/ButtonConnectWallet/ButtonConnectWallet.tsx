@@ -13,6 +13,7 @@ import { getServerSignature, loginUser } from 'lib/services';
 import { toast } from 'react-toastify';
 import { ErrorExeTransaction } from '../ErrorExeTransaction';
 import useSwitchToSelectedChain from 'lib/states/wallet/hooks';
+import { env } from 'lib/constants';
 
 export function ButtonConnectWallet({ requiedLogin }: { requiedLogin: boolean }) {
     const { isConnecting, address, isReconnecting } = useAccount();
@@ -213,7 +214,7 @@ function MenuItemLogin() {
             const serverSignature = await getServerSignature();
             console.log(serverSignature);
             const signature = await signMessageAsync({ message: serverSignature.msg, account: address });
-            const responseLogin = await loginUser({ role: 0, address: address, signature: signature, serverSignature: serverSignature });
+            const responseLogin = await loginUser({ role: env.VITE_APP_USER_ROLE == 'builder' ? 0 : 1, address: address, signature: signature, serverSignature: serverSignature });
             console.log(responseLogin);
             setAccessToken(responseLogin);
             toast.success('Login success');

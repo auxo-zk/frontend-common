@@ -2,6 +2,7 @@ import { clientStorage } from 'lib/constants';
 import axios from 'axios';
 import { apiUrl } from './apiUrl';
 import { Campaign, CampaignFundraising, CampaignState, Course, DataCreateCourse, DataPostAuthen, DraftCourse, ServerSignature, UpdateProfileInput, UserProfile } from './types';
+import { USER_ROLE } from 'lib/types';
 
 export async function getServerSignature(): Promise<ServerSignature> {
     const response = await axios.get(apiUrl.authen);
@@ -196,8 +197,8 @@ export async function createDraftCourse(data: DataCreateCourse): Promise<any> {
     return response;
 }
 
-//! #######################################################################################################################
-export async function getProfile(role: 'builder' | 'organizer', address: string): Promise<UserProfile> {
+//! USER #######################################################################################################################
+export async function getProfile(role: USER_ROLE, address: string): Promise<UserProfile> {
     const response: any = (await axios.get((role == 'builder' ? apiUrl.builderProfile : apiUrl.organizerProfile) + `/${address}`)).data;
     return {
         address: response.address,
@@ -209,7 +210,7 @@ export async function getProfile(role: 'builder' | 'organizer', address: string)
     };
 }
 
-export async function updateProfileInfo(role: 'builder' | 'organizer', input: UpdateProfileInput): Promise<any> {
+export async function updateProfileInfo(role: USER_ROLE, input: UpdateProfileInput): Promise<any> {
     const jwt = clientStorage.ACCESS_TOKEN();
     const response: any = await axios.post(role == 'builder' ? apiUrl.builderProfile : apiUrl.organizerProfile, input, {
         headers: {
@@ -219,7 +220,7 @@ export async function updateProfileInfo(role: 'builder' | 'organizer', input: Up
     return response;
 }
 
-export async function updateProfileAvatar(role: 'builder' | 'organizer', input: File): Promise<string> {
+export async function updateProfileAvatar(role: USER_ROLE, input: File): Promise<string> {
     const jwt = clientStorage.ACCESS_TOKEN();
     const formData = new FormData();
     formData.append('avatar', input);

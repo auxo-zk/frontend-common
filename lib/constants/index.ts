@@ -21,4 +21,6 @@ export const fileIcon: { [k: string]: SvgComponent } = {
     unknown: InsertDriveFile,
 };
 
+export const env = import.meta.env;
+
 export * from './imagePath';
