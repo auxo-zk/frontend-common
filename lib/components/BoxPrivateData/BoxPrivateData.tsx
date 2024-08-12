@@ -3,8 +3,9 @@ import { IconSpinLoading } from '../../icons';
 import { ReactNode } from 'react';
 import { useAccount } from 'wagmi';
 import { ButtonConnectWallet } from '../ButtonConnectWallet';
+import { USER_ROLE } from 'lib/types';
 
-export function BoxPrivateData({ children, iconLoadingProps, requiedLogin }: { requiedLogin: boolean; children?: ReactNode; iconLoadingProps?: SxProps }) {
+export function BoxPrivateData({ children, iconLoadingProps, requiedLogin, role }: { requiedLogin: boolean; role: USER_ROLE; children?: ReactNode; iconLoadingProps?: SxProps }) {
     const { address: userAddress, isConnecting } = useAccount();
 
     if (isConnecting) {
@@ -24,7 +25,7 @@ export function BoxPrivateData({ children, iconLoadingProps, requiedLogin }: { r
                     <Typography variant="body2" fontWeight={600} my={2}>
                         Connect wallet to continute!
                     </Typography>
-                    <ButtonConnectWallet requiedLogin={requiedLogin} />
+                    <ButtonConnectWallet requiedLogin={requiedLogin} role={role} />
                 </Box>
             )}
         </Box>
