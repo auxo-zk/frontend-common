@@ -9,7 +9,7 @@ import { deepmerge } from '@mui/utils';
 export const FontInter = '"Inter", sans-serif';
 export const FontRaleway = '"Raleway", sans-serif';
 
-export const themeMode = atomWithStorage<THEME_MODE>(KeyLocalStorage.THEME, 'light');
+export const themeMode = atomWithStorage<THEME_MODE>('theme', 'light');
 export const themeConfig = atom((get) => {
     const mode = get(themeMode);
     const _t = createTheme(getThemeConfig(mode));

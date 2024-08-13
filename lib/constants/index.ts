@@ -1,6 +1,9 @@
 import { ImageRounded, InsertDriveFile } from '@mui/icons-material';
 import { SvgComponent } from 'crypto-token-icon';
 
+export * from './imagePath';
+export * from './contractAddress';
+
 export const KeyLocalStorage = {
     THEME: 'theme',
     ACCESS_TOKEN: 'access_token',
@@ -20,6 +23,3 @@ export const fileIcon: { [k: string]: SvgComponent } = {
     'image/svg': ImageRounded,
     unknown: InsertDriveFile,
 };
-
-export * from './imagePath';
-export * from './contractAddress';
