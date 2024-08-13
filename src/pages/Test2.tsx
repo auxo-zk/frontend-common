@@ -42,6 +42,7 @@ export default function Test2() {
                             member: [],
                             problemStatement: 'problem',
                             solution: 'solution',
+                            publicKey: 'fjsdfjsfj',
                         }}
                     />
                 </Grid>

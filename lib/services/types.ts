@@ -20,6 +20,7 @@ export type Course = {
     totalClaimedAmount: number;
     totalFundedAmount: number;
 
+    publicKey: string;
     description: string;
     documents: FileSaved[];
     member: MemberData[];
