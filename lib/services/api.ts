@@ -160,21 +160,21 @@ function filterDataDraftCourse(data: any): DraftCourse {
     // console.log('challengeAndRisk:', data.ipfsData?.challengeAndRisk);
     return {
         id: data._id + '' || '#',
-        name: data.ipfsData?.name || '',
-        avatar: data.ipfsData?.avatarImage || '',
-        banner: data.ipfsData?.coverImage || '',
+        name: data.name || '',
+        avatar: data.avatarImage || '',
+        banner: data.coverImage || '',
         date: new Date().toLocaleDateString(),
-        description: data.ipfsData?.description || '',
-        documents: data.ipfsData?.documents || [],
-        member: data.ipfsData?.members || [],
-        solution: data.ipfsData?.solution || '',
-        problemStatement: data.ipfsData?.problemStatement || '',
-        challengeAndRisk: data.ipfsData?.challengeAndRisk || '',
+        description: data.description || '',
+        documents: data.documents || [],
+        member: data.members || [],
+        solution: data.solution || '',
+        problemStatement: data.problemStatement || '',
+        challengeAndRisk: data.challengeAndRisk || '',
     };
 }
 export async function getDraftCourses(): Promise<DraftCourse[]> {
     const jwt = clientStorage.ACCESS_TOKEN();
-    const response = await axios.get(apiUrl.draftsCourse, {
+    const response = await axios.get(apiUrl.draftsCourse + '/all', {
         headers: {
             Authorization: `Bearer ${jwt}`,
         },
