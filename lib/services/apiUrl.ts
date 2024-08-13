@@ -10,7 +10,11 @@ export const apiUrl = {
     getFundraisingInfoByProjectId: (projectId: string) => `${BACKEND_BASE_URL}/projects/${projectId}/participations`, // ? return campaign that project joined
     getFundraisingInfoOfProjectInCampaign: (projectId: string, campaignId: string) => `${BACKEND_BASE_URL}/projects/${projectId}/participations/${campaignId}`, // ? return campaign and info mileton that project joined
     campaign: `${BACKEND_BASE_URL}/campaigns`,
+
     builderProfile: `${BACKEND_BASE_URL1}/builders`,
+
     organizerProfile: `${BACKEND_BASE_URL1}/organizers`,
+    ipfsHashCreateCampaign: `${BACKEND_BASE_URL1}/organizers/create-campaign-ipfs-hash`,
+
     saveFile: `${BACKEND_BASE_URL1}/object-storage`,
 };

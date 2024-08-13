@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { fundingOption } from 'lib/constants';
 import { StateCampaign } from './StateCampaign';
 
-export function CardCampaign({ data, toLink = '#' }: { data: Campaign; toLink?: string }) {
+export function CardCampaign({ data, toLink = '#', children }: { data: Campaign; toLink?: string; children?: React.ReactNode }) {
     return (
         <Card avatar={data.avatar} banner={data.banner} sxBanner={{ minHeight: '150px' }}>
             <Box display={'flex'} sx={{ placeItems: 'center' }} mb={4}>
@@ -30,6 +30,7 @@ export function CardCampaign({ data, toLink = '#' }: { data: Campaign; toLink?: 
                 </Typography>{' '}
                 {data.capacity}
             </Typography>
+            {children}
         </Card>
     );
 }

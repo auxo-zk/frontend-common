@@ -1,8 +1,9 @@
 import { createConfig, http } from 'wagmi';
-import { arbitrum, bscTestnet, arbitrumSepolia } from 'wagmi/chains';
+import { arbitrum, sepolia, arbitrumSepolia } from 'wagmi/chains';
 import { Chain, createClient } from 'viem';
 import { injected, walletConnect } from 'wagmi/connectors';
 import { IconARB, IconBNB, IconMetamask, IconWalletConnect, SvgComponent, WalletName } from 'crypto-token-icon';
+import { IconEDU } from 'lib/icons';
 declare module 'wagmi' {
     interface Register {
         config: ReturnType<typeof walletConfig>;
@@ -23,12 +24,35 @@ export const auxoDevNet = {
         },
     },
 } as const satisfies Chain;
+export const openCampusCodex = {
+    id: 656476,
+    name: 'Open Campus Codex Sepolia',
+    nativeCurrency: { name: 'EDU', symbol: 'EDU', decimals: 18 },
+    rpcUrls: {
+        default: {
+            http: ['https://open-campus-codex-sepolia.drpc.org'],
+        },
+    },
+    blockExplorers: {
+        default: {
+            name: 'Open Campus Codex explorer',
+            url: 'https://opencampus-codex.blockscout.com/',
+            apiUrl: 'https://opencampus-codex.blockscout.com/api/v2',
+        },
+    },
+    contracts: {
+        multicall3: {
+            address: '0x80a0A5f33652881a2bADD3cE977b7193A38FdF36',
+            blockCreated: 23850,
+        },
+    },
+} as const satisfies Chain;
 
 export type AppChainId = ReturnType<typeof walletConfig>['chains'][number]['id'];
 
 export const walletConfig = (walletConnectId: string) =>
     createConfig({
-        chains: [auxoDevNet, arbitrumSepolia, arbitrum],
+        chains: [openCampusCodex, auxoDevNet],
         connectors: [
             injected({ target: 'metaMask' }),
             walletConnect({
@@ -47,17 +71,21 @@ export const walletConfig = (walletConnectId: string) =>
     });
 
 export const infoChain: { [k in AppChainId]: { logoChain: SvgComponent; name: string } } = {
-    [arbitrum.id]: {
-        logoChain: IconARB,
-        name: 'Arbitrum',
-    },
-    [arbitrumSepolia.id]: {
-        logoChain: IconARB,
-        name: 'Arbitrum Sepolia',
-    },
+    // [arbitrum.id]: {
+    //     logoChain: IconARB,
+    //     name: 'Arbitrum',
+    // },
+    // [arbitrumSepolia.id]: {
+    //     logoChain: IconARB,
+    //     name: 'Arbitrum Sepolia',
+    // },
     [auxoDevNet.id]: {
         logoChain: IconARB,
         name: 'Auxo DevNet',
+    },
+    [openCampusCodex.id]: {
+        logoChain: IconEDU,
+        name: 'OCC Sepolia',
     },
     // [bscTestnet.id]: {
     //     logoChain: IconBNB,

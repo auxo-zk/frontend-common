@@ -270,3 +270,32 @@ export const IconChevonRight: SvgComponent = (props) => {
         </SvgIcon>
     );
 };
+
+export const IconEDU: SvgComponent = (props) => {
+    return (
+        <SvgIcon {...props} viewBox="0 0 60 60" sx={{ enableBackground: 'new 0 0 60 60', ...props.sx }}>
+            <g transform="translate(-347.682 -127.304)">
+                <g transform="translate(347.682 127.304)">
+                    <g transform="translate(0)">
+                        <g transform="translate(0)">
+                            <path fill="#00EDBE" d="M29.6,0C13.1,0.2-0.2,13.8,0,30.4S13.8,60.2,30.4,60C46.8,59.8,60,46.5,60,30      C59.9,13.3,46.3-0.1,29.6,0z" />
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(59.986)">
+                    <g>
+                        <path
+                            fill="#141BEB"
+                            d="M329.4,146.2c-0.1-1.5,0.3-3,1.1-4.3h-24.5c-0.9,0-1.7,0.7-1.7,1.7c0,0,0,0,0,0v5.2     c0,0.9,0.8,1.7,1.7,1.7l0,0h24.5C329.6,149.2,329.3,147.7,329.4,146.2"
+                        />
+                        <path
+                            fill="#141BEB"
+                            d="M300.4,157.4c0.1,1.5-0.3,3-1.1,4.3h24.5c0.9,0,1.7-0.7,1.7-1.7v0v-5.2     c0-0.9-0.8-1.7-1.7-1.7c0,0,0,0,0,0h-24.5C300.1,154.4,300.5,155.9,300.4,157.4"
+                        />
+                        <path fill="#141BEB" d="M329.4,168.6c-0.1-1.5,0.3-3,1.1-4.3h-24.5c-0.9,0-1.7,0.7-1.7,1.7l0,0v5.2     c0,0.9,0.8,1.7,1.7,1.7l0,0h24.5C329.6,171.6,329.3,170.1,329.4,168.6" />
+                    </g>
+                </g>
+            </g>
+        </SvgIcon>
+    );
+};

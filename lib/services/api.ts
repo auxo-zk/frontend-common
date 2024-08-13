@@ -118,6 +118,16 @@ export async function getFundraisingInfoOfProjectInCampaign(projectId: string, c
     return filterDataCampaignFundraising(response.data);
 }
 
+export async function ipfsHashCreateCampaign(data: any): Promise<any> {
+    const jwt = clientStorage.ACCESS_TOKEN();
+    const response = await axios.post(apiUrl.ipfsHashCreateCampaign, data, {
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+        },
+    });
+    return response.data;
+}
+
 //! Courses #######################################################################################################################
 
 function filterDataCourse(data: any): Course {

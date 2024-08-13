@@ -6,3 +6,4 @@ export * from './components';
 export * from './animations';
 export * from './icons';
 export * from './services';
+export * from './contracts';
