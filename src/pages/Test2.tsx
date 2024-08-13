@@ -1,5 +1,5 @@
-import { Container, TextField } from '@mui/material';
-import { BoxAddDocument, BoxIntroducePage, BoxPrivateData, BoxProfile, BoxTeamMember, InputBanner } from 'lib/components';
+import { Container, Grid, TextField } from '@mui/material';
+import { BoxAddDocument, BoxIntroducePage, BoxPrivateData, BoxProfile, BoxTeamMember, CardDraftCourse, InputBanner } from 'lib/components';
 import React from 'react';
 
 export default function Test2() {
@@ -26,6 +26,26 @@ export default function Test2() {
             <BoxTeamMember members={[{ name: '', link: '', publicKey: '', role: '' }]} addTeamMember={() => {}} editTeamMember={() => {}} removeTeamMember={() => {}} />
 
             <BoxAddDocument documents={[]} documentFiles={[]} addDocumentFiles={() => {}} deleteDocumentFiles={() => {}} deleteDocuments={() => {}} />
+
+            <Grid container spacing={2}>
+                <Grid item xs={3}>
+                    <CardDraftCourse
+                        item={{
+                            avatar: '',
+                            banner: '',
+                            description: 'desc',
+                            challengeAndRisk: 'challenge',
+                            name: 'name',
+                            date: new Date().toDateString(),
+                            documents: [],
+                            id: '1df4546sd4f6',
+                            member: [],
+                            problemStatement: 'problem',
+                            solution: 'solution',
+                        }}
+                    />
+                </Grid>
+            </Grid>
         </Container>
     );
 }

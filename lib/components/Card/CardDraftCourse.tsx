@@ -1,9 +1,10 @@
 import { DraftCourse } from 'lib/services';
 import { Card } from './Card';
-import { Box, Button, Chip, Typography } from '@mui/material';
+import { Box, Button, Chip, IconButton, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { DeleteOutline } from '@mui/icons-material';
 
-export function CardDraftCourse({ item, target, toLink }: { item: DraftCourse; toLink?: string; target?: React.HTMLAttributeAnchorTarget }) {
+export function CardDraftCourse({ item, target, toLink, onDeleteDraft }: { item: DraftCourse; toLink?: string; target?: React.HTMLAttributeAnchorTarget; onDeleteDraft?: () => void }) {
     return (
         <Card avatar={item.avatar} banner={item.banner} sxBanner={{ minHeight: '102px' }}>
             <Typography variant="h6" fontWeight={600} mt={1} component={'p'} title={item.name} sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -25,11 +26,16 @@ export function CardDraftCourse({ item, target, toLink }: { item: DraftCourse; t
                     '& > *': { m: 0 },
                 }}
             ></Box>
-            <Link style={{ color: 'inherit', textDecoration: 'none', width: '100%' }} to={toLink || '#'} target={target}>
-                <Button fullWidth variant="outlined" size="small">
-                    Edit
-                </Button>
-            </Link>
+            <Box sx={{ display: 'flex', gap: 1, placeItems: 'center' }}>
+                <Link style={{ color: 'inherit', textDecoration: 'none', width: '100%' }} to={toLink || '#'} target={target}>
+                    <Button fullWidth variant="outlined" size="small">
+                        Edit
+                    </Button>
+                </Link>
+                <IconButton color="error" onClick={onDeleteDraft}>
+                    <DeleteOutline />
+                </IconButton>
+            </Box>
         </Card>
     );
 }

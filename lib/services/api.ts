@@ -204,7 +204,16 @@ export async function createDraftCourse(data: DataCreateCourse): Promise<any> {
 }
 export async function updateDraftCourse(idDraft: string, data: DataCreateCourse): Promise<any> {
     const jwt = clientStorage.ACCESS_TOKEN();
-    const response = await axios.put(apiUrl.draftsCourse + '/' + idDraft, data, {
+    const response = await axios.post(apiUrl.draftsCourse + '/' + idDraft, data, {
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+        },
+    });
+    return response;
+}
+export async function deleteDraftCourse(idDraft: string): Promise<any> {
+    const jwt = clientStorage.ACCESS_TOKEN();
+    const response = await axios.delete(apiUrl.draftsCourse + '/' + idDraft, {
         headers: {
             Authorization: `Bearer ${jwt}`,
         },
