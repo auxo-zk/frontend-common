@@ -1,7 +1,7 @@
 import { clientStorage } from 'lib/constants';
 import axios from 'axios';
 import { apiUrl } from './apiUrl';
-import { Campaign, CampaignFundraising, CampaignState, Course, DataCreateCourse, DataPostAuthen, DraftCourse, ServerSignature, UpdateProfileInput, UserProfile } from './types';
+import { Campaign, CampaignFundraising, CampaignState, Course, DataCreateCourse, DataPostAuthen, DraftCourse, FileSaved, ServerSignature, UpdateProfileInput, UserProfile } from './types';
 import { USER_ROLE } from 'lib/types';
 
 export async function getServerSignature(): Promise<ServerSignature> {
@@ -112,6 +112,12 @@ export async function getFundraisingInfoByProjectId(projectId: string): Promise<
     return response.data.map((item: any, index: number) => filterDataCampaignFundraising(item));
 }
 
+export async function getFundraisingInfoOfProjectInCampaign(projectId: string, campaignId: string): Promise<CampaignFundraising> {
+    const response = await axios.get(apiUrl.getFundraisingInfoOfProjectInCampaign(projectId, campaignId));
+    // console.log('getFundraisingInfoOfProjectInCampaign', response);
+    return filterDataCampaignFundraising(response.data);
+}
+
 //! Courses #######################################################################################################################
 
 function filterDataCourse(data: any): Course {
@@ -196,6 +202,15 @@ export async function createDraftCourse(data: DataCreateCourse): Promise<any> {
     });
     return response;
 }
+export async function updateDraftCourse(idDraft: string, data: DataCreateCourse): Promise<any> {
+    const jwt = clientStorage.ACCESS_TOKEN();
+    const response = await axios.put(apiUrl.draftsCourse + '/' + idDraft, data, {
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+        },
+    });
+    return response;
+}
 
 //! USER #######################################################################################################################
 export async function getProfile(role: USER_ROLE, address: string): Promise<UserProfile> {
@@ -232,6 +247,12 @@ export async function updateProfileAvatar(role: USER_ROLE, input: File): Promise
     return result.URL;
 }
 
-//! #######################################################################################################################
+//! File #######################################################################################################################
+export async function saveFile(file: File): Promise<FileSaved> {
+    const formData = new FormData();
+    formData.append('file', file);
+    const result = await axios.post(apiUrl.saveFile, formData);
+    return result.data;
+}
 
 //! #######################################################################################################################
