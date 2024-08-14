@@ -40,6 +40,7 @@ export type DataCreateCourse = {
     challengeAndRisk: string;
     members: MemberData[];
     documents: FileSaved[];
+    tokenFunding: TokenInfo;
 };
 
 export type DraftCourse = Omit<Course, 'totalClaimedAmount' | 'totalFundedAmount'>;
@@ -140,4 +141,18 @@ export type ScopeOfWork = {
     information: string;
     milestone: string;
     raisingAmount: string;
+};
+
+export type TokenInfo = {
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
+};
+
+export type IpfsHashResult = {
+    IpfsHash: string;
+    Timestamp: string;
+    PinSize: number;
+    Hash: string;
 };

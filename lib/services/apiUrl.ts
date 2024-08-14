@@ -6,6 +6,7 @@ export const apiUrl = {
     courses: `${BACKEND_BASE_URL}/projects`,
     draftsCourse: `${BACKEND_BASE_URL1}/builders/drafts`,
     getListProjectJoinedInCampaign: (campaignId: string) => `${BACKEND_BASE_URL}/campaigns/${campaignId}/projects`, // ? return list project that joined campaign
+    ifpsHashCreateCourse: `${BACKEND_BASE_URL1}/builders/create-course-ipfs-hash`,
 
     getFundraisingInfoByProjectId: (projectId: string) => `${BACKEND_BASE_URL}/projects/${projectId}/participations`, // ? return campaign that project joined
     getFundraisingInfoOfProjectInCampaign: (projectId: string, campaignId: string) => `${BACKEND_BASE_URL}/projects/${projectId}/participations/${campaignId}`, // ? return campaign and info mileton that project joined

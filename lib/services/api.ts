@@ -1,7 +1,20 @@
 import { clientStorage } from 'lib/constants';
 import axios from 'axios';
 import { apiUrl } from './apiUrl';
-import { Campaign, CampaignFundraising, CampaignState, Course, DataCreateCourse, DataPostAuthen, DraftCourse, FileSaved, ServerSignature, UpdateProfileInput, UserProfile } from './types';
+import {
+    Campaign,
+    CampaignFundraising,
+    CampaignState,
+    Course,
+    DataCreateCourse,
+    DataPostAuthen,
+    DraftCourse,
+    FileSaved,
+    IpfsHashResult,
+    ServerSignature,
+    UpdateProfileInput,
+    UserProfile,
+} from './types';
 import { USER_ROLE } from 'lib/types';
 
 export async function getServerSignature(): Promise<ServerSignature> {
@@ -118,7 +131,7 @@ export async function getFundraisingInfoOfProjectInCampaign(projectId: string, c
     return filterDataCampaignFundraising(response.data);
 }
 
-export async function ipfsHashCreateCampaign(data: any): Promise<any> {
+export async function ipfsHashCreateCampaign(data: any): Promise<IpfsHashResult> {
     const jwt = clientStorage.ACCESS_TOKEN();
     const response = await axios.post(apiUrl.ipfsHashCreateCampaign, data, {
         headers: {
@@ -231,6 +244,16 @@ export async function deleteDraftCourse(idDraft: string): Promise<any> {
         },
     });
     return response;
+}
+
+export async function ipfsHashCreateCourse(data: DataCreateCourse): Promise<IpfsHashResult> {
+    const jwt = clientStorage.ACCESS_TOKEN();
+    const response = await axios.post(apiUrl.ifpsHashCreateCourse, data, {
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+        },
+    });
+    return response.data;
 }
 
 //! USER #######################################################################################################################
