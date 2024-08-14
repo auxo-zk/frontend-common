@@ -1,3 +1,5 @@
+import { Address } from 'viem';
+
 export type ServerSignature = {
     msg: string;
     msgHash: string;
@@ -27,6 +29,7 @@ export type Course = {
     solution: string;
     problemStatement: string;
     challengeAndRisk: string;
+    tokenFunding: TokenInfo;
 };
 
 export type DataCreateCourse = {
@@ -144,7 +147,7 @@ export type ScopeOfWork = {
 };
 
 export type TokenInfo = {
-    address: string;
+    address: Address;
     name: string;
     symbol: string;
     decimals: number;
