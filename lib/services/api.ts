@@ -6,6 +6,7 @@ import {
     CampaignFundraising,
     CampaignState,
     Course,
+    DataCreateCampaign,
     DataCreateCourse,
     DataPostAuthen,
     DraftCourse,
@@ -131,7 +132,7 @@ export async function getFundraisingInfoOfProjectInCampaign(projectId: string, c
     return filterDataCampaignFundraising(response.data);
 }
 
-export async function ipfsHashCreateCampaign(data: any): Promise<IpfsHashResult> {
+export async function ipfsHashCreateCampaign(data: DataCreateCampaign): Promise<IpfsHashResult> {
     const jwt = clientStorage.ACCESS_TOKEN();
     const response = await axios.post(apiUrl.ipfsHashCreateCampaign, data, {
         headers: {

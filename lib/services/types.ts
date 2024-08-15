@@ -84,6 +84,24 @@ export type Campaign = {
     questions: CampaignQuestion[];
 };
 
+export type DataCreateCampaign = {
+    name: string;
+    coverImage: string;
+    avatarImage: string;
+    description: string;
+    fundingOption: number;
+    capacity: number;
+    timeline: {
+        startParticipation: number;
+        startFunding: number;
+        startRequesting: number;
+    };
+    privacyOption: {
+        isPrivate: boolean;
+    };
+    questions: CampaignQuestion[];
+};
+
 export type CampaignFundraising = {
     campaignId: string;
     campaignName: string;
