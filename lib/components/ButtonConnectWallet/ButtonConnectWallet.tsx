@@ -12,7 +12,7 @@ import { useCheckLogin, useSetAccessToken, useSetAddressWallet } from 'lib/state
 import { getServerSignature, loginUser } from 'lib/services';
 import { toast } from 'react-toastify';
 import { ErrorExeTransaction } from '../ErrorExeTransaction';
-import useSwitchToSelectedChain from 'lib/states/wallet/hooks';
+import { useSwitchToSelectedChain } from 'lib/states/wallet/hooks';
 import { USER_ROLE } from 'lib/types';
 
 export function ButtonConnectWallet({ requiedLogin, role }: { requiedLogin: boolean; role: USER_ROLE }) {
