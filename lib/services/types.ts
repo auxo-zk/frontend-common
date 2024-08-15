@@ -172,8 +172,9 @@ export type TokenInfo = {
 };
 
 export type IpfsHashResult = {
-    IpfsHash: Address;
+    IpfsHash: string;
     Timestamp: string;
     PinSize: number;
-    Hash: Address;
+    HashBase58: string;
+    HashHex: Address;
 };

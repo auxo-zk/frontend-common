@@ -2,6 +2,7 @@ import { Box, Button, Container, Grid } from '@mui/material';
 import { CardCampaign } from 'lib/components';
 import { CardCourse } from 'lib/components/Card/CardCourse';
 import { Campaign, Course, getCampaigns, getCourses } from 'lib/services';
+import { base58ToHex } from 'lib/utils';
 import React, { useEffect } from 'react';
 
 export default function Test() {
@@ -28,6 +29,7 @@ export default function Test() {
     useEffect(() => {
         fetchCourses();
         fetchCampaign();
+        console.log(base58ToHex('Qmb8LANBN9qCaA71DCaY2X8gppt2dc4fw2EH7YG2dMHUHT'));
     }, []);
     return (
         <Container>

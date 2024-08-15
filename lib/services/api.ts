@@ -17,6 +17,7 @@ import {
     UserProfile,
 } from './types';
 import { USER_ROLE } from 'lib/types';
+import { base58ToHex } from 'lib/utils';
 
 export async function getServerSignature(): Promise<ServerSignature> {
     const response = await axios.get(apiUrl.authen);
@@ -139,7 +140,13 @@ export async function ipfsHashCreateCampaign(data: DataCreateCampaign): Promise<
             Authorization: `Bearer ${jwt}`,
         },
     });
-    return response.data;
+    return {
+        HashBase58: response.data?.Hash || '',
+        HashHex: base58ToHex(response.data?.Hash || '0x00'),
+        IpfsHash: response.data?.IpfsHash || '',
+        PinSize: response.data?.PinSize || 0,
+        Timestamp: response.data?.Timestamp || 0,
+    };
 }
 
 //! Courses #######################################################################################################################
@@ -256,7 +263,13 @@ export async function ipfsHashCreateCourse(data: DataCreateCourse): Promise<Ipfs
             Authorization: `Bearer ${jwt}`,
         },
     });
-    return response.data;
+    return {
+        HashBase58: response.data?.Hash || '',
+        HashHex: base58ToHex(response.data?.Hash || '0x00'),
+        IpfsHash: response.data?.IpfsHash || '',
+        PinSize: response.data?.PinSize || 0,
+        Timestamp: response.data?.Timestamp || 0,
+    };
 }
 
 //! USER #######################################################################################################################

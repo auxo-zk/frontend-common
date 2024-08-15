@@ -2,6 +2,9 @@ export * from './format';
 
 import BigNumber from 'bignumber.js';
 import { toast } from 'react-toastify';
+import bs58 from 'bs58';
+import { Buffer } from 'buffer';
+import { Address } from 'viem';
 
 export function isNumeric(num: any) {
     return !isNaN(num) && !isNaN(parseFloat(num));
@@ -58,4 +61,12 @@ export function throttle(callback: (...args: any[]) => any, delay: number = 1000
             shouldWait = false;
         }, delay);
     };
+}
+
+export function base58ToHex(base58String: string): Address {
+    // Decode the Base58 string to a byte array
+    const decoded = bs58.decode(base58String);
+    // Convert the byte array to a hexadecimal string
+    const hexString = `0x${Buffer.from(decoded).toString('hex')}`;
+    return hexString as Address;
 }
