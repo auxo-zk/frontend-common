@@ -29,7 +29,6 @@ export type Course = {
     solution: string;
     problemStatement: string;
     challengeAndRisk: string;
-    tokenFunding: TokenInfo;
 };
 
 export type DataCreateCourse = {
@@ -43,7 +42,6 @@ export type DataCreateCourse = {
     challengeAndRisk: string;
     members: MemberData[];
     documents: FileSaved[];
-    tokenFunding: TokenInfo;
 };
 
 export type DraftCourse = Omit<Course, 'totalClaimedAmount' | 'totalFundedAmount'>;
@@ -82,6 +80,7 @@ export type Campaign = {
         avatar: string;
     };
     questions: CampaignQuestion[];
+    tokenFunding: TokenInfo;
 };
 
 export type DataCreateCampaign = {
@@ -100,6 +99,7 @@ export type DataCreateCampaign = {
         isPrivate: boolean;
     };
     questions: CampaignQuestion[];
+    tokenFunding: TokenInfo;
 };
 
 export type CampaignFundraising = {
@@ -124,6 +124,7 @@ export type CampaignFundraising = {
         startRequesting: string;
     };
     campaignState: number;
+    tokenFunding: TokenInfo;
 };
 
 export type User = {};

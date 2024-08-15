@@ -82,6 +82,7 @@ function filterDataCampaign(item: any): Campaign {
             startRequesting: item.timeline?.startRequesting * 1000 || 0,
         },
         questions: item.ipfsData?.questions || [],
+        tokenFunding: item?.ipfsData?.tokenFunding || { address: '0x00', decimals: 0, symbol: '', name: '0x00' },
     };
 }
 export async function getCampaigns(addressUser?: string): Promise<Campaign[]> {
@@ -119,6 +120,7 @@ function filterDataCampaignFundraising(item: any): CampaignFundraising {
             startRequesting: item.campaign?.ipfsData?.timeline?.startRequesting || '',
         },
         campaignState: item.campaign?.state || 0,
+        tokenFunding: item?.campaign?.ipfsData?.tokenFunding || { address: '0x00', decimals: 0, symbol: '', name: '0x00' },
     };
 }
 export async function getFundraisingInfoByProjectId(projectId: string): Promise<CampaignFundraising[]> {
@@ -168,7 +170,6 @@ function filterDataCourse(data: any): Course {
         problemStatement: data?.ipfsData?.problemStatement || '',
         challengeAndRisk: data?.ipfsData?.challengeAndRisk || '',
         publicKey: data?.ipfsData?.publicKey || '',
-        tokenFunding: data?.ipfsData?.tokenFunding || { address: '0x00', decimals: 0, symbol: '', name: '0x00' },
     };
 }
 export async function getCourses(addressUser?: string): Promise<Course[]> {
@@ -204,7 +205,6 @@ function filterDataDraftCourse(data: any): DraftCourse {
         problemStatement: data.problemStatement || '',
         challengeAndRisk: data.challengeAndRisk || '',
         publicKey: data.publicKey || '',
-        tokenFunding: data.tokenFunding || { address: '0x00', decimals: 0, symbol: '', name: '0x00' },
     };
 }
 export async function getDraftCourses(): Promise<DraftCourse[]> {
