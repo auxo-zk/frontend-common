@@ -170,6 +170,7 @@ function filterDataCourse(data: any): Course {
         problemStatement: data?.ipfsData?.problemStatement || '',
         challengeAndRisk: data?.ipfsData?.challengeAndRisk || '',
         publicKey: data?.ipfsData?.publicKey || '',
+        courseSymbol: data?.ipfsData?.courseSymbol || '',
     };
 }
 export async function getCourses(addressUser?: string): Promise<Course[]> {
@@ -205,6 +206,7 @@ function filterDataDraftCourse(data: any): DraftCourse {
         problemStatement: data.problemStatement || '',
         challengeAndRisk: data.challengeAndRisk || '',
         publicKey: data.publicKey || '',
+        courseSymbol: data.courseSymbol || '',
     };
 }
 export async function getDraftCourses(): Promise<DraftCourse[]> {

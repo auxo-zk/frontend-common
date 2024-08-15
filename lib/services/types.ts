@@ -21,7 +21,7 @@ export type Course = {
     avatar: string;
     totalClaimedAmount: number;
     totalFundedAmount: number;
-
+    courseSymbol: string;
     publicKey: string;
     description: string;
     documents: FileSaved[];
@@ -33,6 +33,7 @@ export type Course = {
 
 export type DataCreateCourse = {
     name: string;
+    courseSymbol: string;
     avatarImage: string;
     coverImage: string;
     publicKey: string;
