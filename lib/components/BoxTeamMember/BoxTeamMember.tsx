@@ -49,7 +49,7 @@ export function BoxTeamMember({ members, addTeamMember, editTeamMember, removeTe
                     <Grid
                         key={member.publicKey + index}
                         container
-                        spacing={2}
+                        spacing={1}
                         sx={{
                             '& .MuiGrid-item': {
                                 display: 'flex',
@@ -58,12 +58,28 @@ export function BoxTeamMember({ members, addTeamMember, editTeamMember, removeTe
                         }}
                         className="member-row"
                     >
-                        <Grid item xs={12} md={3.5}>
+                        <Grid item xs={12} md={3}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                <Avatar sx={{ width: '50px', height: '50px' }} />
+                                <TextField
+                                    sx={{ ml: 2 }}
+                                    label="Wallet Address"
+                                    name="member_publicKey"
+                                    onChange={(e) => {
+                                        editTeamMember(index, {
+                                            publicKey: e.target.value,
+                                        });
+                                    }}
+                                    defaultValue={member.publicKey}
+                                />
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} md={3}>
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                {/* <Avatar sx={{ width: '50px', height: '50px' }} /> */}
                                 <TextField
                                     sx={{ ml: 2 }}
                                     label="Profile Name"
+                                    name="member_name"
                                     onChange={(e) => {
                                         editTeamMember(index, {
                                             name: e.target.value,
@@ -73,9 +89,10 @@ export function BoxTeamMember({ members, addTeamMember, editTeamMember, removeTe
                                 />
                             </Box>
                         </Grid>
-                        <Grid item xs={12} md={3}>
+                        <Grid item xs={12} md={2.5}>
                             <TextField
                                 label="Role"
+                                name="member_role"
                                 onChange={(e) => {
                                     editTeamMember(index, {
                                         role: e.target.value,
@@ -84,9 +101,10 @@ export function BoxTeamMember({ members, addTeamMember, editTeamMember, removeTe
                                 defaultValue={member.role}
                             />
                         </Grid>
-                        <Grid item xs={12} md={4}>
+                        <Grid item xs={12} md={2.5}>
                             <TextField
                                 label="Social Link"
+                                name="member_link"
                                 onChange={(e) => {
                                     editTeamMember(index, {
                                         link: e.target.value,
@@ -95,7 +113,7 @@ export function BoxTeamMember({ members, addTeamMember, editTeamMember, removeTe
                                 defaultValue={member.link}
                             />
                         </Grid>
-                        <Grid item xs={12} md={1.5} sx={{ justifyContent: 'flex-end' }}>
+                        <Grid item xs={12} md={1} sx={{ justifyContent: 'flex-end' }}>
                             <Box sx={{ minWidth: '100px', display: 'flex', justifyContent: 'center' }}>
                                 <IconButton
                                     onClick={() => {
