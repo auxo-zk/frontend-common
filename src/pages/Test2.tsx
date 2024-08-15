@@ -43,6 +43,7 @@ export default function Test2() {
                             problemStatement: 'problem',
                             solution: 'solution',
                             publicKey: 'fjsdfjsfj',
+                            tokenFunding: { address: '0x00', decimals: 0, name: '', symbol: '' },
                         }}
                     />
                 </Grid>
