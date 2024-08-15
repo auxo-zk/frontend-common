@@ -67,6 +67,6 @@ export function base58ToHex(base58String: string): Address {
     // Decode the Base58 string to a byte array
     const decoded = bs58.decode(base58String);
     // Convert the byte array to a hexadecimal string
-    const hexString = `0x${Buffer.from(decoded).toString('hex')}`;
+    const hexString = `0x${Buffer.from(decoded).toString('hex').slice(4)}`;
     return hexString as Address;
 }
