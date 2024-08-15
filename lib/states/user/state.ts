@@ -13,7 +13,7 @@ export const validLogin = atom(async (get) => {
     if (!_addressWallet) return false;
     if (checkValidAccessToken(_addressWallet, _accessToken)) {
         if (await verifyJwt(_accessToken)) {
-            return { addressWallet: _addressWallet, accessToken: _accessToken };
+            return true;
         }
     }
     return false;

@@ -1,9 +1,11 @@
-import { Box, Grid, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import { Avatar } from '../Avatar';
 import { updateProfileAvatar, updateProfileInfo, UpdateProfileInput, UserProfile } from 'lib/services';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { ButtonLoading } from '../ButtonLoading';
+import { copyTextToClipboard } from 'lib/utils';
+import { useCheckLogin } from 'lib/states';
 
 export function BoxProfile({
     initData,
@@ -20,6 +22,7 @@ export function BoxProfile({
 }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [editProfile, setEditProfile] = useState<UpdateProfileInput>({ name: initData.name, description: initData.description, role: initData.role, link: initData.link });
+    const [validLogin] = useCheckLogin();
 
     function changeInputProfile(key: keyof UpdateProfileInput, value: string) {
         setEditProfile((prev) => ({ ...prev, [key]: value }));
@@ -76,7 +79,18 @@ export function BoxProfile({
                         } catch (error) {}
                     }}
                 />
-                <Box sx={{ flexGrow: 1 }}>
+                <Box sx={{ flexGrow: 1, maxWidth: 'calc(100% - 185px)' }}>
+                    <Typography
+                        variant="body2"
+                        title="Click to copy address"
+                        sx={{ cursor: 'pointer', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                        onClick={() => {
+                            copyTextToClipboard(initData.address);
+                        }}
+                        mb={1}
+                    >
+                        {initData.address}
+                    </Typography>
                     <Typography variant="h4" fontWeight={600}>
                         {initData.name || 'User name here'}
                     </Typography>
@@ -116,9 +130,15 @@ export function BoxProfile({
                         </Grid>
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                        <ButtonLoading isLoading={isSubmitting} muiProps={{ variant: 'contained', onClick: handlePostInfo, disabled: !checkChangedData() }}>
-                            Submit Change
-                        </ButtonLoading>
+                        {validLogin.state === 'hasData' && validLogin.data ? (
+                            <ButtonLoading isLoading={isSubmitting} muiProps={{ variant: 'contained', onClick: handlePostInfo, disabled: !checkChangedData() }}>
+                                Submit Change
+                            </ButtonLoading>
+                        ) : (
+                            <Button variant="contained" disabled>
+                                Login to Submit Change
+                            </Button>
+                        )}
                     </Box>
                 </Box>
             )}
