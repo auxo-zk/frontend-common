@@ -173,8 +173,11 @@ function filterDataCourse(data: any): Course {
     };
 }
 export async function getCourses(addressUser?: string): Promise<Course[]> {
-    const response = await axios.get(apiUrl.courses + (addressUser ? `?member=${addressUser}` : ''));
+    const response = await axios.get(apiUrl.courses);
     // console.log('getCourse', response);
+    if (addressUser) {
+        return response.data?.filter((item: any) => item.founder == addressUser).map((item: any) => filterDataCourse(item)) || [];
+    }
     return response.data?.map((item: any) => filterDataCourse(item)) || [];
 }
 
