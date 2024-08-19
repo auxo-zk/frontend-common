@@ -19,7 +19,7 @@ export default function Test() {
     }
     async function fetchCampaign() {
         try {
-            const response = await getCampaigns();
+            const response = await getCampaigns('0xe3C66D29ed3260f2b9DAc9f7037Fc728DC793C70');
             setCampaigns(response);
         } catch (error) {
             console.error(error);

@@ -29,6 +29,10 @@ export type Course = {
     solution: string;
     problemStatement: string;
     challengeAndRisk: string;
+
+    founder: Address;
+    nftAddress: Address;
+    revenuePoolFactoryAddress: Address;
 };
 
 export type DataCreateCourse = {
@@ -45,7 +49,7 @@ export type DataCreateCourse = {
     documents: FileSaved[];
 };
 
-export type DraftCourse = Omit<Course, 'totalClaimedAmount' | 'totalFundedAmount'>;
+export type DraftCourse = Omit<Course, 'totalClaimedAmount' | 'totalFundedAmount' | 'nftAddress' | 'revenuePoolFactoryAddress' | 'founder'>;
 
 export enum CampaignState {
     'UPCOMING',

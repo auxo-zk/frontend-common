@@ -4,8 +4,8 @@ import { Address } from 'viem';
 export type ContractName = 'GovernorFactory' | 'Campaign' | 'TokenFund';
 export const contractAddress: Record<AppChainId, Record<ContractName, Address>> = {
     [openCampusCodex.id]: {
-        GovernorFactory: '0xe04F111eE5616B7741b5d9aA8836528c29B837AE',
-        Campaign: '0x6dF9314e6849aC82bFe7b71898A0AA46134175bE',
+        GovernorFactory: '0x98b7F3a520C54416e201713f44150E42791b9800',
+        Campaign: '0xF94f468AB416f8256Fb8dA87473c5f9216023C5C',
         TokenFund: '0xd35f12eF94db3d84Bbf2a43F2537cF294C7E6717',
     },
     [auxoDevNet.id]: {

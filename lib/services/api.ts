@@ -48,9 +48,9 @@ export async function verifyJwt(jwt?: string) {
 
 function filterDataCampaign(item: any): Campaign {
     const timeLine = {
-        startParticipation: item.timeline?.startParticipation ? item.timeline.startParticipation * 1000 : Date.now() + 60000,
-        startFunding: item.timeline?.startFunding ? item.timeline.startFunding * 1000 : Date.now() + 60000,
-        startRequesting: item.timeline?.startRequesting ? item.timeline.startRequesting * 1000 : Date.now() + 60000,
+        startParticipation: item.timeline?.startParticipation ? new Date(item.timeline.startParticipation).getTime() : Date.now() + 60000,
+        startFunding: item.timeline?.startFunding ? new Date(item.timeline.startFunding).getTime() : Date.now() + 60000,
+        startRequesting: item.timeline?.startRequesting ? new Date(item.timeline.startRequesting).getTime() : Date.now() + 60000,
     };
     const now = new Date().getTime();
     let state = CampaignState.UPCOMING;
@@ -76,17 +76,13 @@ function filterDataCampaign(item: any): Campaign {
             name: item?.ownerInfo?.name || 'Unnkown Name',
         },
         description: item.ipfsData?.description || '',
-        timeline: {
-            startParticipation: item.timeline?.startParticipation * 1000 || 0,
-            startFunding: item.timeline?.startFunding * 1000 || 0,
-            startRequesting: item.timeline?.startRequesting * 1000 || 0,
-        },
+        timeline: timeLine,
         questions: item.ipfsData?.questions || [],
         tokenFunding: item?.ipfsData?.tokenFunding || { address: '0x00', decimals: 0, symbol: '', name: '0x00' },
     };
 }
 export async function getCampaigns(addressUser?: string): Promise<Campaign[]> {
-    const response = await axios.get(apiUrl.campaign + (addressUser ? `?owner=${addressUser}` : ''));
+    const response = await axios.get(apiUrl.campaign + (addressUser ? `?organizer=${addressUser}` : ''));
     // console.log('getCampaigns', response);
     const data = response.data;
 
@@ -162,7 +158,7 @@ function filterDataCourse(data: any): Course {
         banner: data?.ipfsData?.coverImage || '',
         date: new Date().toLocaleDateString(),
         totalClaimedAmount: data?.totalClaimedAmount || 0,
-        totalFundedAmount: data?.totalFundedAmount || 0,
+        totalFundedAmount: data?.totalFunded || 0,
         description: data?.ipfsData?.description || '',
         documents: data?.ipfsData?.documents || [],
         member: data?.ipfsData?.members || [],
@@ -171,12 +167,15 @@ function filterDataCourse(data: any): Course {
         challengeAndRisk: data?.ipfsData?.challengeAndRisk || '',
         publicKey: data?.ipfsData?.publicKey || '',
         courseSymbol: data?.ipfsData?.courseSymbol || '',
+        nftAddress: data?.tokenAddress || '0x00',
+        revenuePoolFactoryAddress: data?.revenuePoolFactoryAddress || '0x00',
+        founder: data?.founder || '0x00',
     };
 }
 export async function getCourses(addressUser?: string): Promise<Course[]> {
     const response = await axios.get(apiUrl.courses + (addressUser ? `?member=${addressUser}` : ''));
     // console.log('getCourse', response);
-    return response.data?.map((item: any, index: number) => filterDataCourse(item)) || [];
+    return response.data?.map((item: any) => filterDataCourse(item)) || [];
 }
 
 export async function getCourse(idCourse: string): Promise<Course> {

@@ -3,14 +3,14 @@ import { BACKEND_BASE_URL, BACKEND_BASE_URL1 } from './baseURL';
 export const apiUrl = {
     authen: `${BACKEND_BASE_URL1}/auth`,
     checkJwt: `${BACKEND_BASE_URL1}/auth/profile`,
-    courses: `${BACKEND_BASE_URL}/projects`,
+    courses: `${BACKEND_BASE_URL1}/non-privacy/governors`,
     draftsCourse: `${BACKEND_BASE_URL1}/builders/drafts`,
     getListProjectJoinedInCampaign: (campaignId: string) => `${BACKEND_BASE_URL}/campaigns/${campaignId}/projects`, // ? return list project that joined campaign
     ifpsHashCreateCourse: `${BACKEND_BASE_URL1}/builders/create-course-ipfs-hash`,
 
     getFundraisingInfoByProjectId: (projectId: string) => `${BACKEND_BASE_URL}/projects/${projectId}/participations`, // ? return campaign that project joined
     getFundraisingInfoOfProjectInCampaign: (projectId: string, campaignId: string) => `${BACKEND_BASE_URL}/projects/${projectId}/participations/${campaignId}`, // ? return campaign and info mileton that project joined
-    campaign: `${BACKEND_BASE_URL}/campaigns`,
+    campaign: `${BACKEND_BASE_URL1}/non-privacy/campaigns`,
 
     builderProfile: `${BACKEND_BASE_URL1}/builders`,
 
