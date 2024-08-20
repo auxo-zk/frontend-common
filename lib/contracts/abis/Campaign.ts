@@ -210,6 +210,11 @@ export const abiCampaign = [
                         name: 'minted',
                         type: 'uint256',
                     },
+                    {
+                        internalType: 'bytes32',
+                        name: 'descriptionHash',
+                        type: 'bytes32',
+                    },
                 ],
                 internalType: 'struct ICampaign.Course',
                 name: '',
@@ -273,6 +278,11 @@ export const abiCampaign = [
                 name: 'governor',
                 type: 'address',
             },
+            {
+                internalType: 'bytes32',
+                name: 'descriptionHash',
+                type: 'bytes32',
+            },
         ],
         name: 'joinCampaign',
         outputs: [
@@ -283,6 +293,25 @@ export const abiCampaign = [
             },
         ],
         stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'governorAddress',
+                type: 'address',
+            },
+        ],
+        name: 'joinedCampaign',
+        outputs: [
+            {
+                internalType: 'uint256[]',
+                name: '',
+                type: 'uint256[]',
+            },
+        ],
+        stateMutability: 'view',
         type: 'function',
     },
     {

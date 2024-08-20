@@ -48,6 +48,7 @@ export const openCampusCodex = {
     },
 } as const satisfies Chain;
 
+export type AppPublicClient = ReturnType<ReturnType<typeof walletConfig>['getClient']>;
 export type AppChainId = ReturnType<typeof walletConfig>['chains'][number]['id'];
 
 export const walletConfig = (walletConnectId: string) =>

@@ -132,6 +132,12 @@ export type CampaignFundraising = {
     tokenFunding: TokenInfo;
 };
 
+export type DataJoinCampaign = {
+    answers: string[];
+    scopeOfWorks: ScopeOfWork[];
+    documents: FileSaved[];
+};
+
 export type User = {};
 
 export type FileSaved = {

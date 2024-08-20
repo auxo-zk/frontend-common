@@ -3,7 +3,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { AppStateProvider, IconMenuExplorer, IconUser, Layout, walletConfig, WalletProvider } from 'lib/main';
 import { Outlet } from 'react-router-dom';
 
-const config = walletConfig('6482349197b073ab1d34e32ec4907c1d');
+export const config = walletConfig('6482349197b073ab1d34e32ec4907c1d');
 const queryClient = new QueryClient();
 
 export default function App() {

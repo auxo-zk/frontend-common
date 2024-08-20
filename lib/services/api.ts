@@ -8,6 +8,7 @@ import {
     Course,
     DataCreateCampaign,
     DataCreateCourse,
+    DataJoinCampaign,
     DataPostAuthen,
     DraftCourse,
     FileSaved,
@@ -263,6 +264,22 @@ export async function deleteDraftCourse(idDraft: string): Promise<any> {
 export async function ipfsHashCreateCourse(data: DataCreateCourse): Promise<IpfsHashResult> {
     const jwt = clientStorage.ACCESS_TOKEN();
     const response = await axios.post(apiUrl.ifpsHashCreateCourse, data, {
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+        },
+    });
+    return {
+        HashBase58: response.data?.Hash || '',
+        HashHex: base58ToHex(response.data?.Hash || '0x00'),
+        IpfsHash: response.data?.IpfsHash || '',
+        PinSize: response.data?.PinSize || 0,
+        Timestamp: response.data?.Timestamp || 0,
+    };
+}
+
+export async function ipfsHashJoinCampaign(data: DataJoinCampaign): Promise<IpfsHashResult> {
+    const jwt = clientStorage.ACCESS_TOKEN();
+    const response = await axios.post(apiUrl.ipfsHashJoinCampaign, data, {
         headers: {
             Authorization: `Bearer ${jwt}`,
         },
