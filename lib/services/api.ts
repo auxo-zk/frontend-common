@@ -154,6 +154,7 @@ function filterDataCourse(data: any): Course {
     // console.log('challengeAndRisk:', data.ipfsData?.challengeAndRisk);
     return {
         id: data?.governorId + '' || '#',
+        address: data?.address || '0x00',
         name: data?.ipfsData?.name || '',
         avatar: data?.ipfsData?.avatarImage || '',
         banner: data?.ipfsData?.coverImage || '',

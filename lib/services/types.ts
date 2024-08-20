@@ -15,6 +15,7 @@ export type DataPostAuthen = {
 
 export type Course = {
     id: string;
+    address: Address;
     name: string;
     date: string;
     banner: string;
@@ -49,7 +50,7 @@ export type DataCreateCourse = {
     documents: FileSaved[];
 };
 
-export type DraftCourse = Omit<Course, 'totalClaimedAmount' | 'totalFundedAmount' | 'nftAddress' | 'revenuePoolFactoryAddress' | 'founder'>;
+export type DraftCourse = Omit<Course, 'totalClaimedAmount' | 'totalFundedAmount' | 'nftAddress' | 'revenuePoolFactoryAddress' | 'founder' | 'address'>;
 
 export enum CampaignState {
     'UPCOMING',
