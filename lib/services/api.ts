@@ -153,7 +153,7 @@ export async function ipfsHashCreateCampaign(data: DataCreateCampaign): Promise<
 function filterDataCourse(data: any): Course {
     // console.log('challengeAndRisk:', data.ipfsData?.challengeAndRisk);
     return {
-        id: data?.projectId + '' || '#',
+        id: data?.governorId + '' || '#',
         name: data?.ipfsData?.name || '',
         avatar: data?.ipfsData?.avatarImage || '',
         banner: data?.ipfsData?.coverImage || '',
