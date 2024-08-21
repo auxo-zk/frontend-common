@@ -19,6 +19,9 @@ import {
 } from './types';
 import { USER_ROLE } from 'lib/types';
 import { base58ToHex } from 'lib/utils';
+import { AppPublicClient } from 'lib/states';
+import { getJoinedCampaigns } from 'lib/contracts';
+import { Address } from 'viem';
 
 export async function getServerSignature(): Promise<ServerSignature> {
     const response = await axios.get(apiUrl.authen);
@@ -95,41 +98,49 @@ export async function getCampaign(idCampaign: string): Promise<Campaign> {
     return filterDataCampaign(response.data);
 }
 
-function filterDataCampaignFundraising(item: any): CampaignFundraising {
+function filterDataCampaignFundraising(campaign: any, dataJoinCampaign: any): CampaignFundraising {
     return {
-        campaignId: item.campaignId + '',
-        campaignName: item.campaign?.ipfsData?.name || '',
-        fundedAmount: item.fundedAmount / 10 ** 9 || 0,
-        claimedAmount: item.claimedAmount / 10 ** 9 || 0,
+        campaignId: campaign.campaignId + '',
+        campaignName: campaign?.ipfsData?.name || '',
+        fundedAmount: dataJoinCampaign.fund || 0,
+        claimedAmount: dataJoinCampaign.claimedAmount || 0,
         targetAmount:
-            item.ipfsData?.scopeOfWorks?.reduce((accumulator: number, item: any) => {
+            dataJoinCampaign.ipfsData?.scopeOfWorks?.reduce((accumulator: number, item: any) => {
                 return accumulator + Number(item.raisingAmount);
             }, 0) || 0,
-        raiseInfo: item.raiseInfo || [],
-        documents: item.ipfsData?.documents || [],
-        scopeOfWorks: item.ipfsData?.scopeOfWorks || [],
-        questions: item.campaign?.ipfsData?.questions || [],
-        answers: item.ipfsData?.answers || [],
-        ownerAddress: item.campaign?.owner || '',
+        raiseInfo: dataJoinCampaign.raiseInfo || [],
+        documents: dataJoinCampaign.ipfsData?.documents || [],
+        scopeOfWorks: dataJoinCampaign.ipfsData?.scopeOfWorks || [],
+        questions: campaign?.ipfsData?.questions || [],
+        answers: dataJoinCampaign.ipfsData?.answers || [],
+        ownerAddress: campaign?.owner || '',
         timeline: {
-            startParticipation: item.campaign?.ipfsData?.timeline?.startParticipation || '',
-            startFunding: item.campaign?.ipfsData?.timeline?.startFunding || '',
-            startRequesting: item.campaign?.ipfsData?.timeline?.startRequesting || '',
+            startParticipation: campaign?.ipfsData?.timeline?.startParticipation || '',
+            startFunding: campaign?.ipfsData?.timeline?.startFunding || '',
+            startRequesting: campaign?.ipfsData?.timeline?.startRequesting || '',
         },
-        campaignState: item.campaign?.state || 0,
-        tokenFunding: item?.campaign?.ipfsData?.tokenFunding || { address: '0x00', decimals: 0, symbol: '', name: '0x00' },
+        campaignState: campaign?.state || 0,
+        tokenFunding: campaign?.ipfsData?.tokenFunding || { address: '0x00', decimals: 0, symbol: '', name: '0x00' },
     };
 }
-export async function getFundraisingInfoByProjectId(projectId: string): Promise<CampaignFundraising[]> {
-    const response = await axios.get(apiUrl.getFundraisingInfoByProjectId(projectId));
+export async function getFundraisingInfoByProjectId(projectId: string, governorAddress: Address, client: AppPublicClient): Promise<CampaignFundraising[]> {
+    // const response = await axios.get(apiUrl.getFundraisingInfoByProjectId(projectId));
     // console.log('getCampaignsJoinedByProjectId', response);
-    return response.data.map((item: any, index: number) => filterDataCampaignFundraising(item));
+    const listIdJoinedCampaign = await getJoinedCampaigns(client, governorAddress);
+    const response = await Promise.all(listIdJoinedCampaign.map((idCampaign) => getFundraisingInfoOfProjectInCampaign(projectId, idCampaign.toString())));
+    return response;
 }
 
 export async function getFundraisingInfoOfProjectInCampaign(projectId: string, campaignId: string): Promise<CampaignFundraising> {
-    const response = await axios.get(apiUrl.getFundraisingInfoOfProjectInCampaign(projectId, campaignId));
+    // const resposne = await axios.get(apiUrl.getFundraisingInfoOfProjectInCampaign(projectId, campaignId));
+    const campaignData = (await axios.get(apiUrl.campaign + `/${campaignId}`)).data;
+    const dataCourseJoinCampaign = (campaignData?.courses?.find((item: any) => item.governorId == projectId) as any[]) || [];
+    if (dataCourseJoinCampaign.length == 1) {
+        return filterDataCampaignFundraising(campaignData, dataCourseJoinCampaign[0]);
+    }
     // console.log('getFundraisingInfoOfProjectInCampaign', response);
-    return filterDataCampaignFundraising(response.data);
+    // return filterDataCampaignFundraising(response.data);
+    throw new Error('Not found data join campaign.');
 }
 
 export async function ipfsHashCreateCampaign(data: DataCreateCampaign): Promise<IpfsHashResult> {
