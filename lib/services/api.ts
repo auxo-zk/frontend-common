@@ -190,9 +190,12 @@ export async function getCourse(idCourse: string): Promise<Course> {
 }
 
 export async function getListProjectJoinedInCampaign(campaignId: string): Promise<Course[]> {
-    const response = await axios.get(apiUrl.getListProjectJoinedInCampaign(campaignId));
+    // const response = await axios.get(apiUrl.getListProjectJoinedInCampaign(campaignId));
+    const response = await axios.get(apiUrl.campaign + `/${campaignId}`);
     // console.log('getListProjectJoinedInCampaign', response);
-    return response.data.map((item: any) => filterDataCourse(item));
+    const listIdCourse = response.data?.courses?.map((item: any) => item.governorId) || [];
+    const response2 = await Promise.all(listIdCourse.map((idCourse: string) => getCourse(idCourse)));
+    return response2;
 }
 
 function filterDataDraftCourse(data: any): DraftCourse {
