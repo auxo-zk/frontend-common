@@ -134,9 +134,9 @@ export async function getFundraisingInfoByProjectId(projectId: string, governorA
 export async function getFundraisingInfoOfProjectInCampaign(projectId: string, campaignId: string): Promise<CampaignFundraising> {
     // const resposne = await axios.get(apiUrl.getFundraisingInfoOfProjectInCampaign(projectId, campaignId));
     const campaignData = (await axios.get(apiUrl.campaign + `/${campaignId}`)).data;
-    const dataCourseJoinCampaign = (campaignData?.courses?.find((item: any) => item.governorId == projectId) as any[]) || [];
-    if (dataCourseJoinCampaign.length == 1) {
-        return filterDataCampaignFundraising(campaignData, dataCourseJoinCampaign[0]);
+    const dataCourseJoinCampaign = (campaignData?.courses?.find((item: any) => item.governorId == projectId) as any) || null;
+    if (dataCourseJoinCampaign) {
+        return filterDataCampaignFundraising(campaignData, dataCourseJoinCampaign);
     }
     // console.log('getFundraisingInfoOfProjectInCampaign', response);
     // return filterDataCampaignFundraising(response.data);
