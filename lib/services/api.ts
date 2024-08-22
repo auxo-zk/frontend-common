@@ -52,9 +52,9 @@ export async function verifyJwt(jwt?: string) {
 
 function filterDataCampaign(item: any): Campaign {
     const timeLine = {
-        startParticipation: item.timeline?.startParticipation ? new Date(item.timeline.startParticipation).getTime() : Date.now() + 60000,
-        startFunding: item.timeline?.startFunding ? new Date(item.timeline.startFunding).getTime() : Date.now() + 60000,
-        startRequesting: item.timeline?.startRequesting ? new Date(item.timeline.startRequesting).getTime() : Date.now() + 60000,
+        startParticipation: item.ipfsData?.timeline?.startParticipation ? new Date(item.ipfsData.timeline.startParticipation).getTime() : Date.now() + 60000,
+        startFunding: item.ipfsData?.timeline?.startFunding ? new Date(item.ipfsData.timeline.startFunding).getTime() : Date.now() + 60000,
+        startRequesting: item.ipfsData?.timeline?.startRequesting ? new Date(item.ipfsData.timeline.startRequesting).getTime() : Date.now() + 60000,
     };
     const now = new Date().getTime();
     let state = CampaignState.UPCOMING;
