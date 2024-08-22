@@ -8,7 +8,7 @@ export const apiUrl = {
     getListProjectJoinedInCampaign: (campaignId: string) => `${BACKEND_BASE_URL}/campaigns/${campaignId}/projects`, // ? return list project that joined campaign
     ifpsHashCreateCourse: `${BACKEND_BASE_URL1}/builders/create-course-ipfs-hash`,
 
-    getFundraisingInfoByProjectId: (projectId: string) => `${BACKEND_BASE_URL}/projects/${projectId}/participations`, // ? return campaign that project joined
+    getFundraisingInfoByProjectId: (governorAddress: string) => `${BACKEND_BASE_URL1}/non-privacy/governors/joined-campaigns?governorAddress=${governorAddress}`, // ? return campaign that project joined
     getFundraisingInfoOfProjectInCampaign: (projectId: string, campaignId: string) => `${BACKEND_BASE_URL}/projects/${projectId}/participations/${campaignId}`, // ? return campaign and info mileton that project joined
     campaign: `${BACKEND_BASE_URL1}/non-privacy/campaigns`,
     ipfsHashJoinCampaign: `${BACKEND_BASE_URL1}/non-privacy/campaigns/create-join-campaign-ipfs-hash`,

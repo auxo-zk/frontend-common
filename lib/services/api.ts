@@ -75,9 +75,9 @@ function filterDataCampaign(item: any): Campaign {
         banner: item.ipfsData?.coverImage || '',
         state: state,
         organizer: {
-            address: item?.ownerInfo?.address || '',
-            avatar: item?.ownerInfo?.img || '',
-            name: item?.ownerInfo?.name || 'Unnkown Name',
+            address: item?.founderInfo?.address || '',
+            avatar: item?.founderInfo?.img || '',
+            name: item?.founderInfo?.name || 'Unnkown Name',
         },
         description: item.ipfsData?.description || '',
         timeline: timeLine,
@@ -113,7 +113,7 @@ function filterDataCampaignFundraising(campaign: any, dataJoinCampaign: any): Ca
         scopeOfWorks: dataJoinCampaign.ipfsData?.scopeOfWorks || [],
         questions: campaign?.ipfsData?.questions || [],
         answers: dataJoinCampaign.ipfsData?.answers || [],
-        ownerAddress: campaign?.owner || '',
+        ownerAddress: campaign?.founder || '',
         timeline: {
             startParticipation: campaign?.ipfsData?.timeline?.startParticipation || '',
             startFunding: campaign?.ipfsData?.timeline?.startFunding || '',
@@ -123,12 +123,11 @@ function filterDataCampaignFundraising(campaign: any, dataJoinCampaign: any): Ca
         tokenFunding: campaign?.ipfsData?.tokenFunding || { address: '0x00', decimals: 0, symbol: '', name: '0x00' },
     };
 }
-export async function getFundraisingInfoByProjectId(projectId: string, governorAddress: Address, client: AppPublicClient): Promise<CampaignFundraising[]> {
-    // const response = await axios.get(apiUrl.getFundraisingInfoByProjectId(projectId));
+export async function getFundraisingInfoByProjectId(governorAddress: Address): Promise<CampaignFundraising[]> {
+    const joinedCampaigns = (await axios.get(apiUrl.getFundraisingInfoByProjectId(governorAddress))).data;
     // console.log('getCampaignsJoinedByProjectId', response);
-    const listIdJoinedCampaign = await getJoinedCampaigns(client, governorAddress);
-    const response = await Promise.all(listIdJoinedCampaign.map((idCampaign) => getFundraisingInfoOfProjectInCampaign(projectId, idCampaign.toString())));
-    return response;
+    const campaigns = await Promise.all(joinedCampaigns.map((data: any) => axios.get(apiUrl.campaign + `/${data.campaignId}`)));
+    return joinedCampaigns.map((data: any, index: number) => filterDataCampaignFundraising(campaigns[index], data));
 }
 
 export async function getFundraisingInfoOfProjectInCampaign(projectId: string, campaignId: string): Promise<CampaignFundraising> {
