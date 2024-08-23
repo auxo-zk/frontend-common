@@ -1,19 +1,40 @@
 export const abiCampaign = [
     {
-        inputs: [
-            {
-                internalType: 'uint64',
-                name: 'timelockPeriod_',
-                type: 'uint64',
-            },
-            {
-                internalType: 'uint64',
-                name: 'queuingPeriod_',
-                type: 'uint64',
-            },
-        ],
+        inputs: [],
         stateMutability: 'nonpayable',
         type: 'constructor',
+    },
+    {
+        inputs: [],
+        name: 'InvalidInitialization',
+        type: 'error',
+    },
+    {
+        inputs: [],
+        name: 'NotInitializing',
+        type: 'error',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'owner',
+                type: 'address',
+            },
+        ],
+        name: 'OwnableInvalidOwner',
+        type: 'error',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'account',
+                type: 'address',
+            },
+        ],
+        name: 'OwnableUnauthorizedAccount',
+        type: 'error',
     },
     {
         anonymous: false,
@@ -98,6 +119,38 @@ export const abiCampaign = [
         type: 'event',
     },
     {
+        anonymous: false,
+        inputs: [
+            {
+                indexed: false,
+                internalType: 'uint64',
+                name: 'version',
+                type: 'uint64',
+            },
+        ],
+        name: 'Initialized',
+        type: 'event',
+    },
+    {
+        anonymous: false,
+        inputs: [
+            {
+                indexed: true,
+                internalType: 'address',
+                name: 'previousOwner',
+                type: 'address',
+            },
+            {
+                indexed: true,
+                internalType: 'address',
+                name: 'newOwner',
+                type: 'address',
+            },
+        ],
+        name: 'OwnershipTransferred',
+        type: 'event',
+    },
+    {
         inputs: [
             {
                 internalType: 'uint256',
@@ -162,8 +215,27 @@ export const abiCampaign = [
     {
         inputs: [
             {
+                internalType: 'uint256',
+                name: 'campaignId',
+                type: 'uint256',
+            },
+        ],
+        name: 'campaignFounders',
+        outputs: [
+            {
                 internalType: 'address',
-                name: 'owner',
+                name: 'founder',
+                type: 'address',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: '_owner',
                 type: 'address',
             },
         ],
@@ -250,7 +322,30 @@ export const abiCampaign = [
                 type: 'uint256',
             },
         ],
-        stateMutability: 'payable',
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'uint256',
+                name: 'campaignId',
+                type: 'uint256',
+            },
+            {
+                internalType: 'uint256[]',
+                name: 'governorIds',
+                type: 'uint256[]',
+            },
+            {
+                internalType: 'uint256[]',
+                name: 'amounts',
+                type: 'uint256[]',
+            },
+        ],
+        name: 'funds',
+        outputs: [],
+        stateMutability: 'nonpayable',
         type: 'function',
     },
     {
@@ -261,6 +356,158 @@ export const abiCampaign = [
                 internalType: 'contract IGovernorFactory',
                 name: '',
                 type: 'address',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'initialOwner_',
+                type: 'address',
+            },
+        ],
+        name: 'initialize',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'investor',
+                type: 'address',
+            },
+        ],
+        name: 'investedCampaignList',
+        outputs: [
+            {
+                internalType: 'uint256[]',
+                name: '',
+                type: 'uint256[]',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'investor',
+                type: 'address',
+            },
+            {
+                internalType: 'uint256',
+                name: 'campaignId',
+                type: 'uint256',
+            },
+        ],
+        name: 'investedGovernorInACampaignList',
+        outputs: [
+            {
+                internalType: 'address[]',
+                name: '',
+                type: 'address[]',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'investor',
+                type: 'address',
+            },
+        ],
+        name: 'investedGovernorList',
+        outputs: [
+            {
+                internalType: 'address[]',
+                name: '',
+                type: 'address[]',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'investor',
+                type: 'address',
+            },
+            {
+                internalType: 'uint256',
+                name: 'campaignId',
+                type: 'uint256',
+            },
+        ],
+        name: 'isInvestedCampaign',
+        outputs: [
+            {
+                internalType: 'bool',
+                name: '',
+                type: 'bool',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'investor',
+                type: 'address',
+            },
+            {
+                internalType: 'address',
+                name: 'governor',
+                type: 'address',
+            },
+        ],
+        name: 'isInvestedGovernor',
+        outputs: [
+            {
+                internalType: 'bool',
+                name: '',
+                type: 'bool',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'investor',
+                type: 'address',
+            },
+            {
+                internalType: 'uint256',
+                name: 'campaignId',
+                type: 'uint256',
+            },
+            {
+                internalType: 'address',
+                name: 'governor',
+                type: 'address',
+            },
+        ],
+        name: 'isInvestedGovernorInACampaign',
+        outputs: [
+            {
+                internalType: 'bool',
+                name: '',
+                type: 'bool',
             },
         ],
         stateMutability: 'view',
@@ -362,6 +609,39 @@ export const abiCampaign = [
         type: 'function',
     },
     {
+        inputs: [],
+        name: 'owner',
+        outputs: [
+            {
+                internalType: 'address',
+                name: '',
+                type: 'address',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [],
+        name: 'renounceOwnership',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'contract IGovernorFactory',
+                name: '_governorFactory',
+                type: 'address',
+            },
+        ],
+        name: 'setGovernorFactory',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
         inputs: [
             {
                 internalType: 'uint256',
@@ -378,6 +658,19 @@ export const abiCampaign = [
             },
         ],
         stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'newOwner',
+                type: 'address',
+            },
+        ],
+        name: 'transferOwnership',
+        outputs: [],
+        stateMutability: 'nonpayable',
         type: 'function',
     },
 ] as const;

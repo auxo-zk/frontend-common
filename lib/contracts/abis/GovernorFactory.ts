@@ -1,24 +1,40 @@
 export const abiGovernorFactory = [
     {
+        inputs: [],
+        stateMutability: 'nonpayable',
+        type: 'constructor',
+    },
+    {
+        inputs: [],
+        name: 'InvalidInitialization',
+        type: 'error',
+    },
+    {
+        inputs: [],
+        name: 'NotInitializing',
+        type: 'error',
+    },
+    {
         inputs: [
             {
                 internalType: 'address',
-                name: 'campaign_',
+                name: 'owner',
                 type: 'address',
             },
+        ],
+        name: 'OwnableInvalidOwner',
+        type: 'error',
+    },
+    {
+        inputs: [
             {
-                internalType: 'uint64',
-                name: 'timelockPeriod_',
-                type: 'uint64',
-            },
-            {
-                internalType: 'uint64',
-                name: 'queuingPeriod_',
-                type: 'uint64',
+                internalType: 'address',
+                name: 'account',
+                type: 'address',
             },
         ],
-        stateMutability: 'nonpayable',
-        type: 'constructor',
+        name: 'OwnableUnauthorizedAccount',
+        type: 'error',
     },
     {
         anonymous: false,
@@ -49,6 +65,38 @@ export const abiGovernorFactory = [
             },
         ],
         name: 'GovernorCreated',
+        type: 'event',
+    },
+    {
+        anonymous: false,
+        inputs: [
+            {
+                indexed: false,
+                internalType: 'uint64',
+                name: 'version',
+                type: 'uint64',
+            },
+        ],
+        name: 'Initialized',
+        type: 'event',
+    },
+    {
+        anonymous: false,
+        inputs: [
+            {
+                indexed: true,
+                internalType: 'address',
+                name: 'previousOwner',
+                type: 'address',
+            },
+            {
+                indexed: true,
+                internalType: 'address',
+                name: 'newOwner',
+                type: 'address',
+            },
+        ],
+        name: 'OwnershipTransferred',
         type: 'event',
     },
     {
@@ -162,6 +210,39 @@ export const abiGovernorFactory = [
         type: 'function',
     },
     {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'initialOwner_',
+                type: 'address',
+            },
+            {
+                internalType: 'address',
+                name: 'campaign_',
+                type: 'address',
+            },
+            {
+                internalType: 'address',
+                name: 'revenuePoolFactoryCreator_',
+                type: 'address',
+            },
+            {
+                internalType: 'uint64',
+                name: 'timelockPeriod_',
+                type: 'uint64',
+            },
+            {
+                internalType: 'uint64',
+                name: 'queuingPeriod_',
+                type: 'uint64',
+            },
+        ],
+        name: 'initialize',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
         inputs: [],
         name: 'nextGovernorId',
         outputs: [
@@ -169,6 +250,19 @@ export const abiGovernorFactory = [
                 internalType: 'uint256',
                 name: '',
                 type: 'uint256',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [],
+        name: 'owner',
+        outputs: [
+            {
+                internalType: 'address',
+                name: '',
+                type: 'address',
             },
         ],
         stateMutability: 'view',
@@ -189,6 +283,13 @@ export const abiGovernorFactory = [
     },
     {
         inputs: [],
+        name: 'renounceOwnership',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        inputs: [],
         name: 'timelockPeriod',
         outputs: [
             {
@@ -198,6 +299,19 @@ export const abiGovernorFactory = [
             },
         ],
         stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'newOwner',
+                type: 'address',
+            },
+        ],
+        name: 'transferOwnership',
+        outputs: [],
+        stateMutability: 'nonpayable',
         type: 'function',
     },
     {
