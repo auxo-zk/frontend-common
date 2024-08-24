@@ -12,6 +12,7 @@ import {
     DataPostAuthen,
     DraftCourse,
     FileSaved,
+    InputCreateVesting,
     IpfsHashResult,
     ServerSignature,
     UpdateProfileInput,
@@ -352,3 +353,13 @@ export async function saveFile(file: File): Promise<FileSaved> {
 }
 
 //! #######################################################################################################################
+
+export async function createVesting(data: InputCreateVesting): Promise<{ targets: string[]; values: string[]; calldatas: string[] }> {
+    const jwt = clientStorage.ACCESS_TOKEN();
+    const response = await axios.post(apiUrl.createVesting, data, {
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+        },
+    });
+    return response.data;
+}

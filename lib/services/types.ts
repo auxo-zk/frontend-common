@@ -191,3 +191,9 @@ export type IpfsHashResult = {
     HashBase58: string;
     HashHex: Address;
 };
+
+export type InputCreateVesting = {
+    campaignId: number;
+    governorAddress: string;
+    amount: string;
+};

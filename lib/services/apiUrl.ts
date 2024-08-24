@@ -19,4 +19,6 @@ export const apiUrl = {
     ipfsHashCreateCampaign: `${BACKEND_BASE_URL1}/organizers/create-campaign-ipfs-hash`,
 
     saveFile: `${BACKEND_BASE_URL1}/object-storage`,
+
+    createVesting: `${BACKEND_BASE_URL1}/non-privacy/governors/bytecode/create-vesting`,
 };
