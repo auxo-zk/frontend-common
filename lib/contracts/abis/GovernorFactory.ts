@@ -340,6 +340,11 @@ export const abiGovernorFactory = [
                 name: '',
                 type: 'tuple',
             },
+            {
+                internalType: 'uint256',
+                name: 'proposalId',
+                type: 'uint256',
+            },
         ],
         stateMutability: 'view',
         type: 'function',
