@@ -18,7 +18,7 @@ import {
     UserProfile,
 } from './types';
 import { USER_ROLE } from 'lib/types';
-import { base58ToHex } from 'lib/utils';
+import { base58ToHex, BN, DEC } from 'lib/utils';
 import { AppPublicClient } from 'lib/states';
 import { getJoinedCampaigns } from 'lib/contracts';
 import { Address } from 'viem';
@@ -99,10 +99,11 @@ export async function getCampaign(idCampaign: string): Promise<Campaign> {
 }
 
 function filterDataCampaignFundraising(campaign: any, dataJoinCampaign: any): CampaignFundraising {
+    const tokenFunding = campaign?.ipfsData?.tokenFunding || { address: '0x00', decimals: 0, symbol: '', name: '0x00' };
     return {
         campaignId: campaign.campaignId + '',
         campaignName: campaign?.ipfsData?.name || '',
-        fundedAmount: dataJoinCampaign.fund || 0,
+        fundedAmount: BN(dataJoinCampaign.fund).div(DEC(tokenFunding.decimals)).toNumber() || 0,
         claimedAmount: dataJoinCampaign.claimedAmount || 0,
         targetAmount:
             dataJoinCampaign.ipfsData?.scopeOfWorks?.reduce((accumulator: number, item: any) => {
@@ -120,7 +121,7 @@ function filterDataCampaignFundraising(campaign: any, dataJoinCampaign: any): Ca
             startRequesting: campaign?.ipfsData?.timeline?.startRequesting || '',
         },
         campaignState: campaign?.state || 0,
-        tokenFunding: campaign?.ipfsData?.tokenFunding || { address: '0x00', decimals: 0, symbol: '', name: '0x00' },
+        tokenFunding: tokenFunding,
     };
 }
 export async function getFundraisingInfoByProjectId(governorAddress: Address): Promise<CampaignFundraising[]> {
